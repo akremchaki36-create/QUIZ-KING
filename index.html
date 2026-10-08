@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QUIZ KING</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111827, #1e3a8a);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .app {
+      width: 92%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 42px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #dbeafe;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .start {
+      background: #facc15;
+      color: #111827;
+    }
+
+    .language {
+      background: white;
+      color: #111827;
+    }
+
+    #game {
+      display: none;
+    }
+
+    .question {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .score {
+      margin-bottom: 15px;
+      color: #fde68a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div id="home" class="card">
+      <div class="logo">👑 QUIZ KING</div>
+      <div class="subtitle">
+        تحدَّ نفسك وأثبت أنك ملك المعلومات!
+      </div>
+
+      <button class="start" onclick="startGame()">
+        ابدأ اللعب
+      </button>
+
+      <button class="language" onclick="changeLanguage()">
+        العربية / Français
+      </button>
+    </div>
+
+    <div id="game" class="card">
+
+      <div class="score">
+        النقاط: <span id="score">0</span>
+      </div>
+
+      <div id="question" class="question"></div>
+
+      <div id="answers"></div>
+
+    </div>
+
+  </div>
+
+<script>
+
+const questions = [
+  {
+    question: "ما هي عاصمة الجزائر؟",
+    answers: ["الجزائر", "وهران", "قسنطينة", "عنابة"],
+    correct: 0
+  },
+  {
+    question: "كم عدد أيام الأسبوع؟",
+    answers: ["5", "6", "7", "8"],
+    correct: 2
+  },
+  {
+    question: "ما هو أكبر كوكب في المجموعة الشمسية؟",
+    answers: ["الأرض", "المشتري", "المريخ", "الزهرة"],
+    correct: 1
+  }
+];
+
+let current = 0;
+let score = 0;
+
+function startGame() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("game").style.display = "block";
+  showQuestion();
+}
+
+function showQuestion() {
+
+  if (current >= questions.length) {
+    document.getElementById("question").innerHTML =
+      "🎉 انتهت المسابقة!";
+
+    document.getElementById("answers").innerHTML =
+      "<h2>نتيجتك: " + score + " نقطة</h2>";
+
+    return;
+  }
+
+  const q = questions[current];
+
+  document.getElementById("question").innerText =
+    q.question;
+
+  const answers = document.getElementById("answers");
+
+  answers.innerHTML = "";
+
+  q.answers.forEach((answer, index) => {
+
+    const button = document.createElement("button");
+
+    button.innerText = answer;
+
+    button.onclick = function() {
+
+      if (index === q.correct) {
+        score += 10;
+        alert("✅ إجابة صحيحة!");
+      } else {
+        alert("❌ إجابة خاطئة!");
+      }
+
+      document.getElementById("score").innerText = score;
+
+      current++;
+
+      showQuestion();
+    };
+
+    answers.appendChild(button);
+  });
+}
+
+function changeLanguage() {
+  alert("سيتم إضافة العربية والفرنسية بشكل كامل في المرحلة التالية.");
+}
+
+</script>
+
+</body>
+  </html>
