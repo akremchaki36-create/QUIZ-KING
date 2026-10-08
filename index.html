@@ -1251,3 +1251,230 @@ showQuestion();
 
 
 /* ========
+*/
+
+let answered = false;
+let correctCount = 0;
+
+/* ANSWER QUESTION */
+
+function answerQuestion(index) {
+    if (answered) return;
+
+    answered = true;
+    clearInterval(timerId);
+
+    const q = gameQuestions[current];
+    const buttons = document.getElementById("answers").children;
+    const t = translations[language];
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+
+        if (i === q.correct) {
+            buttons[i].classList.add("correct");
+        }
+    }
+
+    if (index === q.correct) {
+        score += 10;
+        correctCount++;
+        document.getElementById("message").textContent = t.correct;
+    } else {
+        buttons[index].classList.add("wrong");
+        document.getElementById("message").textContent = t.wrong;
+    }
+
+    document.getElementById("score").textContent = score;
+
+    setTimeout(() => {
+        current++;
+        showQuestion();
+    }, 1100);
+}
+
+/* HINT */
+
+function useHint() {
+    if (answered) return;
+
+    const t = translations[language];
+
+    if (hintUsed) {
+        document.getElementById("message").textContent =
+            language === "ar" ? "استخدمت التلميح بالفعل!" :
+            language === "fr" ? "Indice déjà utilisé !" :
+            "Hint already used!";
+        return;
+    }
+
+    if (score < 15) {
+        document.getElementById("message").textContent = t.need;
+        return;
+    }
+
+    score -= 15;
+    hintUsed = true;
+
+    const q = gameQuestions[current];
+    const buttons = document.getElementById("answers").children;
+
+    let removed = 0;
+
+    for (let i = 0; i < buttons.length; i++) {
+        if (i !== q.correct && removed < 2) {
+            buttons[i].disabled = true;
+            buttons[i].style.visibility = "hidden";
+            removed++;
+        }
+    }
+
+    document.getElementById("score").textContent = score;
+    document.getElementById("message").textContent = t.used;
+}
+
+/* TYPED ANSWER */
+
+function submitTypedAnswer() {
+    if (answered) return;
+
+    const input = document.getElementById("typedAnswer");
+    const value = input.value.trim().toLowerCase();
+
+    if (!value) {
+        document.getElementById("message").textContent =
+            language === "ar" ? "اكتب إجابتك أولًا." :
+            language === "fr" ? "Écrivez d'abord votre réponse." :
+            "Type your answer first.";
+        return;
+    }
+
+    const q = gameQuestions[current];
+    const correctAnswer = q.a[q.correct].trim().toLowerCase();
+
+    if (value === correctAnswer) {
+        answerQuestion(q.correct);
+    } else {
+        let found = -1;
+
+        for (let i = 0; i < q.a.length; i++) {
+            if (value === q.a[i].trim().toLowerCase()) {
+                found = i;
+                break;
+            }
+        }
+
+        answerQuestion(found === -1 ? -1 : found);
+    }
+}
+
+/* VOICE ANSWER */
+
+function voiceAnswer() {
+    const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        document.getElementById("message").textContent =
+            language === "ar"
+                ? "المتصفح لا يدعم الإجابة الصوتية. جرّب Chrome."
+                : language === "fr"
+                ? "La reconnaissance vocale n'est pas prise en charge."
+                : "Voice recognition is not supported in this browser.";
+        return;
+    }
+
+    if (answered) return;
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang =
+        language === "ar" ? "ar-DZ" :
+        language === "fr" ? "fr-FR" : "en-US";
+
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    document.getElementById("message").textContent =
+        language === "ar" ? "🎤 استمع إليك الآن..." :
+        language === "fr" ? "🎤 Je vous écoute..." :
+        "🎤 Listening...";
+
+    recognition.onresult = function(event) {
+        const spoken = event.results[0][0].transcript
+            .trim()
+            .toLowerCase();
+
+        const q = gameQuestions[current];
+
+        let found = -1;
+
+        for (let i = 0; i < q.a.length; i++) {
+            if (spoken === q.a[i].trim().toLowerCase()) {
+                found = i;
+                break;
+            }
+        }
+
+        if (found !== -1) {
+            answerQuestion(found);
+        } else {
+            document.getElementById("message").textContent =
+                language === "ar"
+                    ? "لم أتعرف على الإجابة. حاول اختيارها من القائمة."
+                    : language === "fr"
+                    ? "Réponse non reconnue. Choisissez dans la liste."
+                    : "Answer not recognized. Choose from the list.";
+        }
+    };
+
+    recognition.onerror = function() {
+        document.getElementById("message").textContent =
+            language === "ar"
+                ? "تعذر التعرف على الصوت. تحقق من إذن الميكروفون."
+                : language === "fr"
+                ? "Erreur du microphone. Vérifiez les autorisations."
+                : "Voice error. Check microphone permissions.";
+    };
+
+    recognition.start();
+}
+
+/* FINISH GAME */
+
+function finishGame() {
+    clearInterval(timerId);
+
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    document.getElementById("finalScore").textContent = score;
+
+    const percentage = gameQuestions.length
+        ? Math.round((correctCount / gameQuestions.length) * 100)
+        : 0;
+
+    document.getElementById("resultText").textContent =
+        translations[language].result
+            .replace("{p}", percentage)
+            .replace("{s}", score);
+}
+
+/* RESTART */
+
+function restart() {
+    clearInterval(timerId);
+
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("home").classList.remove("hidden");
+
+    selectedCategory = "all";
+    renderCategories();
+}
+
+/* INITIALIZE APP */
+
+updateLanguage();</script>
+</body>
+</html>
