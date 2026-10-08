@@ -1,201 +1,612 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QUIZ KING</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QUIZ KING 👑</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #111827, #1e3a8a);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .app {
-      width: 92%;
-      max-width: 500px;
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 42px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #dbeafe;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 12px;
-      border: none;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .start {
-      background: #facc15;
-      color: #111827;
-    }
-
-    .language {
-      background: white;
-      color: #111827;
-    }
-
-    #game {
-      display: none;
-    }
-
-    .question {
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-
-    .score {
-      margin-bottom: 15px;
-      color: #fde68a;
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#080d1c,#172554,#1e40af);
+color:white;
+min-height:100vh;
+}
+.app{width:94%;max-width:520px;margin:auto;padding:25px 0}
+.logo{text-align:center;font-size:38px;font-weight:bold;margin:15px 0}
+.subtitle{text-align:center;color:#cbd5e1;margin-bottom:20px}
+.card{
+background:rgba(255,255,255,.10);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:24px;
+padding:22px;
+box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+button{
+width:100%;
+border:0;
+border-radius:14px;
+padding:15px;
+margin:7px 0;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+}
+.primary{background:#facc15;color:#111827}
+.secondary{background:#fff;color:#111827}
+.category{
+background:rgba(255,255,255,.13);
+color:white;
+border:1px solid rgba(255,255,255,.2)
+}
+.top{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+font-weight:bold
+}
+.progress{
+height:8px;
+background:rgba(255,255,255,.15);
+border-radius:10px;
+overflow:hidden;
+margin-bottom:18px
+}
+.progress div{
+height:100%;
+background:#facc15;
+width:0%
+}
+.question{
+font-size:22px;
+font-weight:bold;
+line-height:1.5;
+margin-bottom:18px
+}
+.answer{
+background:white;
+color:#111827
+}
+.answer.correct{background:#22c55e;color:white}
+.answer.wrong{background:#ef4444;color:white}
+.info{
+text-align:center;
+color:#fde68a;
+margin:10px
+}
+.hidden{display:none}
+.hint{
+background:#38bdf8;
+color:#082f49
+}
+.result{text-align:center}
+.big{font-size:50px}
+.small{color:#cbd5e1}
+.lang{
+background:transparent;
+border:1px solid #64748b;
+color:white;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <div id="home" class="card">
-      <div class="logo">👑 QUIZ KING</div>
-      <div class="subtitle">
-        تحدَّ نفسك وأثبت أنك ملك المعلومات!
-      </div>
+<div id="home" class="card">
 
-      <button class="start" onclick="startGame()">
-        ابدأ اللعب
-      </button>
+<div class="logo">👑 QUIZ KING</div>
+<div class="subtitle" id="welcome">
+تحدَّ نفسك وأثبت أنك ملك المعلومات!
+</div>
 
-      <button class="language" onclick="changeLanguage()">
-        العربية / Français
-      </button>
-    </div>
+<button class="lang" onclick="toggleLanguage()">
+العربية / Français
+</button>
 
-    <div id="game" class="card">
+<h3 id="choose">اختر المجال</h3>
 
-      <div class="score">
-        النقاط: <span id="score">0</span>
-      </div>
+<div id="categories"></div>
 
-      <div id="question" class="question"></div>
+<button class="primary" onclick="startGame()" id="startBtn">
+ابدأ اللعب 🚀
+</button>
 
-      <div id="answers"></div>
+</div>
 
-    </div>
 
-  </div>
+<div id="game" class="card hidden">
+
+<div class="top">
+<span>⭐ <span id="score">0</span></span>
+<span>⏱️ <span id="timer">20</span></span>
+<span>❓ <span id="number">1</span></span>
+</div>
+
+<div class="progress">
+<div id="progress"></div>
+</div>
+
+<div class="question" id="question"></div>
+
+<div id="answers"></div>
+
+<button class="hint" onclick="useHint()" id="hintBtn">
+💡 تلميح (-15 نقطة)
+</button>
+
+<div class="info" id="message"></div>
+
+</div>
+
+
+<div id="result" class="card hidden result">
+
+<div class="big">🏆</div>
+
+<h2 id="finished">انتهت المسابقة!</h2>
+
+<h1>
+⭐ <span id="finalScore">0</span>
+</h1>
+
+<p id="resultText"></p>
+
+<button class="primary" onclick="restart()">
+🔄 العب مرة أخرى
+</button>
+
+</div>
+
+</div>
+
 
 <script>
 
-const questions = [
-  {
-    question: "ما هي عاصمة الجزائر؟",
-    answers: ["الجزائر", "وهران", "قسنطينة", "عنابة"],
-    correct: 0
-  },
-  {
-    question: "كم عدد أيام الأسبوع؟",
-    answers: ["5", "6", "7", "8"],
-    correct: 2
-  },
-  {
-    question: "ما هو أكبر كوكب في المجموعة الشمسية؟",
-    answers: ["الأرض", "المشتري", "المريخ", "الزهرة"],
-    correct: 1
-  }
+let language="ar";
+let category="all";
+let current=0;
+let score=0;
+let timer=20;
+let timerId=null;
+let hintUsed=false;
+
+const questions=[
+
+{
+cat:"geography",
+q:"ما هي عاصمة الجزائر؟",
+a:["الجزائر","وهران","قسنطينة","عنابة"],
+c:0
+},
+{
+cat:"geography",
+q:"ما هي عاصمة فرنسا؟",
+a:["مدريد","باريس","روما","برلين"],
+c:1
+},
+{
+cat:"science",
+q:"ما هو أكبر كوكب في المجموعة الشمسية؟",
+a:["الأرض","المريخ","المشتري","الزهرة"],
+c:2
+},
+{
+cat:"science",
+q:"كم عدد الكواكب في المجموعة الشمسية؟",
+a:["7","8","9","10"],
+c:1
+},
+{
+cat:"history",
+q:"في أي قارة تقع الجزائر؟",
+a:["آسيا","أوروبا","أفريقيا","أمريكا"],
+c:2
+},
+{
+cat:"sports",
+q:"كم عدد لاعبي فريق كرة القدم داخل الملعب؟",
+a:["9","10","11","12"],
+c:2
+},
+{
+cat:"culture",
+q:"ما هي اللغة الأكثر انتشارًا في العالم من حيث عدد المتحدثين الأصليين؟",
+a:["العربية","الإنجليزية","الصينية","الفرنسية"],
+c:2
+},
+{
+cat:"technology",
+q:"ماذا يعني الاختصار CPU؟",
+a:[
+"وحدة المعالجة المركزية",
+"ذاكرة مؤقتة",
+"بطاقة رسومات",
+"نظام تشغيل"
+],
+c:0
+},
+{
+cat:"science",
+q:"ما الغاز الذي يحتاجه الإنسان للتنفس؟",
+a:["الأكسجين","الهيدروجين","الهيليوم","النيتروجين"],
+c:0
+},
+{
+cat:"geography",
+q:"ما أكبر محيط في العالم؟",
+a:["الأطلسي","الهندي","الهادئ","المتجمد"],
+c:2
+},
+{
+cat:"sports",
+q:"في أي رياضة يستخدم اللاعب المضرب والكرة الصفراء؟",
+a:["التنس","كرة القدم","السباحة","الملاكمة"],
+c:0
+},
+{
+cat:"history",
+q:"أين توجد الأهرامات الشهيرة؟",
+a:["مصر","الجزائر","المغرب","تونس"],
+c:0
+},
+{
+cat:"culture",
+q:"كم عدد أيام الأسبوع؟",
+a:["5","6","7","8"],
+c:2
+},
+{
+cat:"technology",
+q:"أي شركة طورت نظام Android؟",
+a:["Google","Microsoft","Nintendo","Nokia"],
+c:0
+},
+{
+cat:"science",
+q:"ما هو أقرب كوكب إلى الشمس؟",
+a:["الأرض","عطارد","المريخ","زحل"],
+c:1
+},
+{
+cat:"geography",
+q:"ما هي عاصمة اليابان؟",
+a:["طوكيو","بكين","سيول","بانكوك"],
+c:0
+},
+{
+cat:"sports",
+q:"كم شوطًا في مباراة كرة القدم؟",
+a:["1","2","3","4"],
+c:1
+},
+{
+cat:"technology",
+q:"ما الجهاز المستخدم غالبًا لالتقاط الصور؟",
+a:["الكاميرا","الطابعة","الراوتر","لوحة المفاتيح"],
+c:0
+},
+{
+cat:"culture",
+q:"كم عدد أشهر السنة؟",
+a:["10","11","12","13"],
+c:2
+},
+{
+cat:"history",
+q:"ما الحضارة التي بنت الكولوسيوم؟",
+a:["الرومانية","المصرية","الفارسية","الصينية"],
+c:0
+}
+
 ];
 
-let current = 0;
-let score = 0;
 
-function startGame() {
-  document.getElementById("home").style.display = "none";
-  document.getElementById("game").style.display = "block";
-  showQuestion();
+const categories=[
+["all","🌍 كل المجالات"],
+["geography","🌍 جغرافيا"],
+["science","🔬 علوم"],
+["history","📜 تاريخ"],
+["sports","⚽ رياضة"],
+["culture","📚 ثقافة"],
+["technology","💻 تكنولوجيا"]
+];
+
+
+function renderCategories(){
+
+let box=document.getElementById("categories");
+box.innerHTML="";
+
+categories.forEach(x=>{
+
+let b=document.createElement("button");
+b.className="category";
+b.innerText=x[1];
+
+b.onclick=()=>{
+category=x[0];
+
+document.querySelectorAll(".category")
+.forEach(y=>y.style.outline="none");
+
+b.style.outline="3px solid #facc15";
+};
+
+box.appendChild(b);
+
+});
+
 }
 
-function showQuestion() {
 
-  if (current >= questions.length) {
-    document.getElementById("question").innerHTML =
-      "🎉 انتهت المسابقة!";
+function getQuestions(){
 
-    document.getElementById("answers").innerHTML =
-      "<h2>نتيجتك: " + score + " نقطة</h2>";
+if(category==="all") return [...questions];
 
-    return;
-  }
+return questions.filter(x=>x.cat===category);
 
-  const q = questions[current];
-
-  document.getElementById("question").innerText =
-    q.question;
-
-  const answers = document.getElementById("answers");
-
-  answers.innerHTML = "";
-
-  q.answers.forEach((answer, index) => {
-
-    const button = document.createElement("button");
-
-    button.innerText = answer;
-
-    button.onclick = function() {
-
-      if (index === q.correct) {
-        score += 10;
-        alert("✅ إجابة صحيحة!");
-      } else {
-        alert("❌ إجابة خاطئة!");
-      }
-
-      document.getElementById("score").innerText = score;
-
-      current++;
-
-      showQuestion();
-    };
-
-    answers.appendChild(button);
-  });
 }
 
-function changeLanguage() {
-  alert("سيتم إضافة العربية والفرنسية بشكل كامل في المرحلة التالية.");
+
+let gameQuestions=[];
+
+
+function startGame(){
+
+gameQuestions=getQuestions();
+
+if(gameQuestions.length===0) return;
+
+gameQuestions.sort(()=>Math.random()-.5);
+
+current=0;
+score=0;
+
+document.getElementById("home").classList.add("hidden");
+document.getElementById("result").classList.add("hidden");
+document.getElementById("game").classList.remove("hidden");
+
+showQuestion();
+
 }
+
+
+function showQuestion(){
+
+clearInterval(timerId);
+
+if(current>=gameQuestions.length){
+
+finish();
+
+return;
+}
+
+hintUsed=false;
+timer=20;
+
+document.getElementById("timer").innerText=timer;
+document.getElementById("score").innerText=score;
+document.getElementById("number").innerText=
+(current+1)+" / "+gameQuestions.length;
+
+document.getElementById("progress").style.width=
+((current/gameQuestions.length)*100)+"%";
+
+document.getElementById("message").innerText="";
+
+let q=gameQuestions[current];
+
+document.getElementById("question").innerText=q.q;
+
+let box=document.getElementById("answers");
+box.innerHTML="";
+
+q.a.forEach((answer,index)=>{
+
+let b=document.createElement("button");
+
+b.className="answer";
+b.innerText=answer;
+
+b.onclick=()=>answerQuestion(index);
+
+box.appendChild(b);
+
+});
+
+timerId=setInterval(()=>{
+
+timer--;
+
+document.getElementById("timer").innerText=timer;
+
+if(timer<=0){
+
+clearInterval(timerId);
+
+document.getElementById("message").innerText=
+"⏰ انتهى الوقت!";
+
+setTimeout(()=>{
+current++;
+showQuestion();
+},800);
+
+}
+
+},1000);
+
+}
+
+
+function answerQuestion(index){
+
+clearInterval(timerId);
+
+let q=gameQuestions[current];
+
+let buttons=document.querySelectorAll(".answer");
+
+buttons.forEach(b=>b.disabled=true);
+
+if(index===q.c){
+
+buttons[index].classList.add("correct");
+
+score+=10;
+
+document.getElementById("message").innerText=
+"✅ إجابة صحيحة! +10";
+
+}else{
+
+buttons[index].classList.add("wrong");
+
+buttons[q.c].classList.add("correct");
+
+document.getElementById("message").innerText=
+"❌ إجابة خاطئة!";
+
+}
+
+document.getElementById("score").innerText=score;
+
+setTimeout(()=>{
+
+current++;
+showQuestion();
+
+},900);
+
+}
+
+
+function useHint(){
+
+if(hintUsed) return;
+
+if(score<15){
+
+document.getElementById("message").innerText=
+"❌ تحتاج إلى 15 نقطة لاستخدام التلميح.";
+
+return;
+
+}
+
+score-=15;
+hintUsed=true;
+
+let q=gameQuestions[current];
+
+let wrong=[];
+
+for(let i=0;i<q.a.length;i++){
+
+if(i!==q.c) wrong.push(i);
+
+}
+
+wrong.sort(()=>Math.random()-.5);
+
+let remove=wrong.slice(0,2);
+
+let buttons=document.querySelectorAll(".answer");
+
+remove.forEach(i=>{
+buttons[i].disabled=true;
+buttons[i].style.opacity=".25";
+});
+
+document.getElementById("score").innerText=score;
+
+document.getElementById("message").innerText=
+"💡 تم حذف إجابتين خاطئتين (-15)";
+
+}
+
+
+function finish(){
+
+clearInterval(timerId);
+
+document.getElementById("game").classList.add("hidden");
+document.getElementById("result").classList.remove("hidden");
+
+document.getElementById("finalScore").innerText=score;
+
+let max=gameQuestions.length*10;
+
+let percent=Math.round((score/max)*100);
+
+document.getElementById("resultText").innerText=
+"نتيجتك: "+percent+"% — حصلت على "+score+" نقطة.";
+
+}
+
+
+function restart(){
+
+document.getElementById("result").classList.add("hidden");
+document.getElementById("home").classList.remove("hidden");
+
+}
+
+
+function toggleLanguage(){
+
+if(language==="ar"){
+
+language="fr";
+
+document.documentElement.lang="fr";
+document.documentElement.dir="ltr";
+
+document.getElementById("welcome").innerText=
+"Défiez-vous et devenez le roi des connaissances !";
+
+document.getElementById("choose").innerText=
+"Choisissez une catégorie";
+
+document.getElementById("startBtn").innerText=
+"Commencer 🚀";
+
+document.getElementById("hintBtn").innerText=
+"💡 Indice (-15 points)";
+
+}else{
+
+language="ar";
+
+document.documentElement.lang="ar";
+document.documentElement.dir="rtl";
+
+document.getElementById("welcome").innerText=
+"تحدَّ نفسك وأثبت أنك ملك المعلومات!";
+
+document.getElementById("choose").innerText=
+"اختر المجال";
+
+document.getElementById("startBtn").innerText=
+"ابدأ اللعب 🚀";
+
+document.getElementById("hintBtn").innerText=
+"💡 تلميح (-15 نقطة)";
+
+}
+
+}
+
+
+renderCategories();
 
 </script>
 
 </body>
-  </html>
+</html>
