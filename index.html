@@ -2,630 +2,579 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10152f">
 <title>QUIZ KING 👑</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    min-height:100vh;
-    color:white;
-    background:linear-gradient(135deg,#07111f,#172554,#1d4ed8);
+:root {
+  --bg:#10152f;
+  --panel:#1b2346;
+  --blue:#536dfe;
+  --gold:#ffd166;
+  --text:#ffffff;
+  --muted:#b9c3e8;
+  --green:#31d69b;
+  --red:#ff647c;
 }
-
-.app{
-    width:94%;
-    max-width:620px;
-    margin:auto;
-    padding:18px 0;
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Tahoma,sans-serif;
+  background:radial-gradient(ellipse at top,#28376b,var(--bg) 65%);
+  color:var(--text);
 }
-
-.card{
-    background:rgba(255,255,255,.10);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.16);
-    border-radius:24px;
-    padding:20px;
-    box-shadow:0 15px 40px rgba(0,0,0,.35);
+button,input,select { font:inherit; }
+button {
+  border:0;
+  border-radius:13px;
+  padding:13px 16px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:transform .15s,opacity .15s;
 }
-
-.hidden{display:none!important}
-
-.logo{
-    text-align:center;
-    font-size:40px;
-    font-weight:900;
-    margin:8px;
+button:active { transform:scale(.98); }
+button:disabled { cursor:not-allowed;opacity:.65; }
+.app {
+  width:min(100% - 24px,680px);
+  margin:auto;
+  padding:18px 0 36px;
 }
-
-.subtitle{
-    text-align:center;
-    color:#cbd5e1;
-    margin:10px 0 20px;
+header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:22px;
 }
-
-button,input{
-    font:inherit;
+.logo {
+  font-size:clamp(22px,6vw,32px);
+  font-weight:900;
+  color:var(--gold);
 }
-
-button{
-    width:100%;
-    border:0;
-    border-radius:14px;
-    padding:14px;
-    margin:6px 0;
-    font-weight:bold;
-    cursor:pointer;
+.logo small {
+  display:block;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:3px;
+  margin-top:4px;
 }
-
-button:disabled{
-    cursor:not-allowed;
+select {
+  max-width:145px;
+  padding:10px;
+  border:1px solid #465280;
+  background:var(--panel);
+  color:white;
+  border-radius:10px;
 }
-
-.primary{
-    background:#facc15;
-    color:#111827;
+.card {
+  background:rgba(27,35,70,.96);
+  border:1px solid #35416e;
+  border-radius:23px;
+  padding:22px;
+  box-shadow:0 15px 45px #0003;
 }
-
-.lang{
-    background:transparent;
-    color:white;
-    border:1px solid #64748b;
+h1,h2,p { margin-top:0; }
+h1 { font-size:clamp(25px,7vw,38px); }
+h2 { font-size:22px; }
+.subtitle { color:var(--muted);line-height:1.8; }
+.hero {
+  text-align:center;
+  padding:28px 18px;
 }
-
-.category{
-    background:rgba(255,255,255,.10);
-    color:white;
-    border:1px solid rgba(255,255,255,.18);
+.crown { font-size:65px;margin-bottom:12px; }
+.primary {
+  background:linear-gradient(135deg,#7186ff,#536dfe);
+  color:white;
 }
-
-.category.selected{
-    outline:3px solid #facc15;
+.gold {
+  background:var(--gold);
+  color:#25203c;
 }
-
-.category-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:4px;
+.secondary {
+  background:#303b69;
+  color:white;
+  border:1px solid #465586;
 }
-
-.top{
-    display:flex;
-    justify-content:space-between;
-    font-weight:bold;
-    margin-bottom:12px;
+.danger {
+  background:#57283f;
+  color:white;
 }
-
-.progress{
-    height:8px;
-    background:rgba(255,255,255,.15);
-    border-radius:10px;
-    overflow:hidden;
+.full { width:100%;margin-top:14px; }
+.categories {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin:18px 0;
 }
-
-.progress div{
-    height:100%;
-    width:0;
-    background:#facc15;
+.category {
+  min-height:70px;
+  background:#252f59;
+  border:1px solid #3c4b7e;
+  color:white;
+  text-align:start;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
-
-.question{
-    font-size:22px;
-    font-weight:800;
-    line-height:1.5;
-    margin:18px 0;
+.category.active {
+  border:2px solid var(--gold);
+  background:#39416b;
 }
-
-.answers button{
-    background:white;
-    color:#111827;
+.cat-icon { font-size:25px; }
+.hidden { display:none!important; }
+.stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:18px;
 }
-
-.answers button.correct{
-    background:#22c55e;
-    color:white;
+.stat {
+  background:#252e55;
+  padding:12px 6px;
+  text-align:center;
+  border-radius:13px;
 }
-
-.answers button.wrong{
-    background:#ef4444;
-    color:white;
+.stat strong {
+  display:block;
+  font-size:22px;
+  color:var(--gold);
+  margin-bottom:5px;
 }
-
-.hint{
-    background:#38bdf8;
-    color:#082f49;
+.stat span { color:var(--muted);font-size:12px; }
+.progress {
+  height:7px;
+  background:#394267;
+  border-radius:9px;
+  overflow:hidden;
+  margin-bottom:18px;
 }
-
-.voice{
-    background:#a78bfa;
-    color:#24104f;
+#progressBar {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--blue),var(--gold));
+  transition:width .3s;
 }
-
-.message{
-    min-height:28px;
-    text-align:center;
-    color:#fde68a;
-    margin-top:8px;
+.question-number { color:var(--gold);font-weight:bold; }
+#question {
+  font-size:clamp(20px,5.5vw,27px);
+  line-height:1.65;
+  margin:14px 0 20px;
 }
-
-.visual{
-    text-align:center;
-    font-size:90px;
-    padding:15px;
-    margin-top:15px;
-    border-radius:20px;
-    background:rgba(0,0,0,.25);
+.answers {
+  display:grid;
+  gap:10px;
 }
-
-.typing{
-    width:100%;
-    border:0;
-    border-radius:14px;
-    padding:14px;
-    margin:6px 0;
-    outline:none;
+.answer {
+  width:100%;
+  text-align:start;
+  background:#29345e;
+  color:white;
+  border:1px solid #44517f;
+  line-height:1.5;
 }
-
-.result{
-    text-align:center;
+.answer.correct {
+  background:#155b4a;
+  border-color:var(--green);
 }
-
-.trophy{
-    font-size:75px;
+.answer.wrong {
+  background:#692b43;
+  border-color:var(--red);
 }
-
-.small{
-    color:#cbd5e1;
-    font-size:13px;
+.answer.gone { visibility:hidden; }
+.actions {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  margin-top:15px;
 }
-
-@media(max-width:430px){
-    .category-grid{
-        grid-template-columns:1fr;
-    }
-
-    .question{
-        font-size:20px;
-    }
+.actions button { padding:12px 8px; }
+#message {
+  min-height:30px;
+  line-height:1.7;
+  margin:14px 0 0;
+  color:var(--gold);
+  text-align:center;
+}
+#typingArea { margin-top:14px; }
+#typedAnswer {
+  width:100%;
+  padding:13px;
+  background:#101832;
+  color:white;
+  border:1px solid #53618c;
+  border-radius:12px;
+  margin-bottom:9px;
+}
+.result { text-align:center; }
+.result-icon { font-size:65px; }
+.final-score {
+  color:var(--gold);
+  font-size:48px;
+  font-weight:900;
+  margin:18px;
+}
+footer {
+  text-align:center;
+  color:#8895c2;
+  font-size:12px;
+  margin-top:20px;
+}
+@media(max-width:360px) {
+  .card { padding:15px; }
+  .categories { gap:7px; }
+  .category { padding:10px 7px; }
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-<!-- HOME -->
+<header>
+  <div class="logo">👑 QUIZ KING<small>THINK • PLAY • WIN</small></div>
+  <select id="language" aria-label="Language">
+    <option value="ar">العربية</option>
+    <option value="fr">Français</option>
+    <option value="en">English</option>
+  </select>
+</header>
 
 <section id="home" class="card">
+  <div class="hero">
+    <div class="crown">👑</div>
+    <h1 id="welcome"></h1>
+    <p id="intro" class="subtitle"></p>
+  </div>
 
-<div class="logo">👑 QUIZ KING</div>
+  <h2 id="chooseCategory"></h2>
+  <div id="categories" class="categories"></div>
 
-<div id="subtitle" class="subtitle">
-تحدَّ نفسك وأثبت أنك ملك المعلومات!
-</div>
-
-<button id="languageButton" class="lang" onclick="changeLanguage()">
-العربية / Français / English
-</button>
-
-<h3 id="chooseCategory">
-اختر المجال
-</h3>
-
-<div id="categories" class="category-grid"></div>
-
-<button id="startButton" class="primary" onclick="startGame()">
-ابدأ اللعب 🚀
-</button>
-
+  <button id="startButton" class="primary full"></button>
 </section>
-
-
-<!-- GAME -->
 
 <section id="game" class="card hidden">
+  <div class="stats">
+    <div class="stat">
+      <strong id="score">0</strong>
+      <span id="scoreLabel"></span>
+    </div>
+    <div class="stat">
+      <strong id="timer">20</strong>
+      <span id="timeLabel"></span>
+    </div>
+    <div class="stat">
+      <strong id="counter">1/10</strong>
+      <span id="questionLabel"></span>
+    </div>
+  </div>
 
-<div class="top">
+  <div class="progress"><div id="progressBar"></div></div>
 
-<span>
-⭐ <span id="score">0</span>
-</span>
+  <div class="question-number" id="questionNumber"></div>
+  <div id="question"></div>
+  <div id="answers" class="answers"></div>
 
-<span>
-⏱️ <span id="timer">20</span>
-</span>
+  <div class="actions">
+    <button id="hintButton" class="gold"></button>
+    <button id="typeButton" class="secondary"></button>
+    <button id="voiceButton" class="secondary"></button>
+    <button id="backButton" class="danger"></button>
+  </div>
 
-<span>
-❓ <span id="questionNumber">1</span>
-</span>
+  <div id="typingArea" class="hidden">
+    <input id="typedAnswer" autocomplete="off">
+    <button id="sendButton" class="primary full"></button>
+  </div>
 
-</div>
-
-<div class="progress">
-<div id="progressBar"></div>
-</div>
-
-<div id="visual" class="visual hidden"></div>
-
-<div id="question" class="question"></div>
-
-<div id="answers" class="answers"></div>
-
-<div id="typingArea" class="hidden">
-
-<input
-id="typedAnswer"
-class="typing"
-type="text"
-autocomplete="off"
-placeholder="اكتب إجابتك هنا"
->
-
-<button
-id="sendButton"
-onclick="submitTypedAnswer()">
-إرسال ✍️
-</button>
-
-</div>
-
-<button
-id="voiceButton"
-class="voice"
-onclick="voiceAnswer()">
-🎤 أجب بالصوت
-</button>
-
-<button
-id="hintButton"
-class="hint"
-onclick="useHint()">
-💡 تلميح (-15 نقطة)
-</button>
-
-<div id="message" class="message"></div>
-
+  <p id="message" aria-live="polite"></p>
 </section>
-
-
-<!-- RESULT -->
 
 <section id="result" class="card result hidden">
-
-<div class="trophy">🏆</div>
-
-<h2 id="finished">
-انتهت المسابقة!
-</h2>
-
-<h1>
-⭐ <span id="finalScore">0</span>
-</h1>
-
-<p id="resultText"></p>
-
-<button
-id="againButton"
-class="primary"
-onclick="restart()">
-🔄 العب مرة أخرى
-</button>
-
+  <div class="result-icon">🏆</div>
+  <h1 id="resultTitle"></h1>
+  <p id="resultText" class="subtitle"></p>
+  <div class="final-score" id="finalScore">0</div>
+  <button id="againButton" class="primary full"></button>
+  <button id="homeButton" class="secondary full"></button>
 </section>
 
+<footer>QUIZ KING 👑 — Learn something new every day</footer>
 </div>
 
-
 <script>
+"use strict";
 
-/* =========================
-   LANGUAGES
-========================= */
+const $ = id => document.getElementById(id);
 
-const translations={
-
-ar:{
-subtitle:"تحدَّ نفسك وأثبت أنك ملك المعلومات!",
-choose:"اختر المجال",
-start:"ابدأ اللعب 🚀",
-hint:"💡 تلميح (-15 نقطة)",
-voice:"🎤 أجب بالصوت",
-send:"إرسال ✍️",
-placeholder:"اكتب إجابتك هنا",
-finished:"انتهت المسابقة!",
-again:"🔄 العب مرة أخرى",
-correct:"✅ إجابة صحيحة! +10",
-wrong:"❌ إجابة خاطئة!",
-time:"⏰ انتهى الوقت!",
-need:"❌ تحتاج إلى 15 نقطة لاستخدام التلميح.",
-used:"💡 تم حذف إجابتين خاطئتين (-15)",
-result:"نتيجتك: {p}% — حصلت على {s} نقطة.",
-categories:[
-"🌍 كل المجالات",
-"🌍 جغرافيا",
-"🔬 علوم",
-"📜 تاريخ",
-"⚽ رياضة",
-"🎬 أفلام",
-"📺 مسلسلات",
-"🎵 موسيقى",
-"🕌 دين",
-"📚 ثقافة",
-"💻 تكنولوجيا",
-"🖼️ صور"
-]
-},
-
-fr:{
-subtitle:"Défiez-vous et devenez le roi des connaissances !",
-choose:"Choisissez une catégorie",
-start:"Commencer 🚀",
-hint:"💡 Indice (-15 points)",
-voice:"🎤 Répondre par la voix",
-send:"Envoyer ✍️",
-placeholder:"Écrivez votre réponse",
-finished:"Quiz terminé !",
-again:"🔄 Rejouer",
-correct:"✅ Bonne réponse ! +10",
-wrong:"❌ Mauvaise réponse !",
-time:"⏰ Temps écoulé !",
-need:"❌ Il faut 15 points pour utiliser l'indice.",
-used:"💡 Deux mauvaises réponses supprimées (-15)",
-result:"Résultat : {p}% — {s} points.",
-categories:[
-"🌍 Toutes",
-"🌍 Géographie",
-"🔬 Sciences",
-"📜 Histoire",
-"⚽ Sport",
-"🎬 Films",
-"📺 Séries",
-"🎵 Musique",
-"🕌 Religion",
-"📚 Culture",
-"💻 Technologie",
-"🖼️ Images"
-]
-},
-
-en:{
-subtitle:"Challenge yourself and become the king of knowledge!",
-choose:"Choose a category",
-start:"Start playing 🚀",
-hint:"💡 Hint (-15 points)",
-voice:"🎤 Answer by voice",
-send:"Submit ✍️",
-placeholder:"Type your answer",
-finished:"Quiz finished!",
-again:"🔄 Play again",
-correct:"✅ Correct answer! +10",
-wrong:"❌ Wrong answer!",
-time:"⏰ Time is up!",
-need:"❌ You need 15 points to use a hint.",
-used:"💡 Two wrong answers removed (-15)",
-result:"Score: {p}% — {s} points.",
-categories:[
-"🌍 All",
-"🌍 Geography",
-"🔬 Science",
-"📜 History",
-"⚽ Sports",
-"🎬 Movies",
-"📺 Series",
-"🎵 Music",
-"🕌 Religion",
-"📚 Culture",
-"💻 Technology",
-"🖼️ Images"
-]
-}
-
+const TXT = {
+ ar:{
+  welcome:"مرحبًا بك في مملكة المعرفة!",
+  intro:"اختبر معلوماتك، اجمع النقاط، وكن ملك المسابقات!",
+  choose:"اختر مجال الأسئلة",
+  all:"جميع المجالات",geo:"الجغرافيا",science:"العلوم",
+  history:"التاريخ",sport:"الرياضة",culture:"الثقافة",
+  tech:"التكنولوجيا",religion:"الدين",cinema:"الأفلام",
+  start:"🚀 ابدأ اللعب",score:"النقاط",time:"الوقت",
+  question:"السؤال",hint:"💡 تلميح (-15)",type:"✍️ كتابة",
+  voice:"🎤 صوت",back:"خروج",send:"تأكيد الإجابة",
+  enter:"اكتب إجابتك هنا...",empty:"اكتب إجابتك أولًا.",
+  correct:"✅ إجابة صحيحة! +10 نقاط",
+  wrong:"❌ إجابة خاطئة!",
+  need:"تحتاج إلى 15 نقطة لاستخدام التلميح.",
+  used:"لقد استخدمت التلميح لهذا السؤال.",
+  timeout:"⏰ انتهى الوقت!",
+  listening:"🎤 أستمع إليك الآن...",
+  unsupported:"التعرف الصوتي غير مدعوم. جرّب Chrome.",
+  voiceError:"تعذر التعرف على الصوت. تحقق من إذن الميكروفون.",
+  notRecognized:"لم أتعرف على الإجابة. حاول كتابتها أو اختيارها.",
+  result:"انتهت المسابقة!",again:"🔄 العب مجددًا",
+  home:"🏠 الصفحة الرئيسية",
+  resultText:"أجبت إجابة صحيحة عن {n} من أصل {total} سؤالًا.",
+  quit:"هل تريد الخروج من المسابقة؟",
+  q:"السؤال",of:"من"
+ },
+ fr:{
+  welcome:"Bienvenue dans le royaume du savoir !",
+  intro:"Testez vos connaissances et devenez le roi du quiz !",
+  choose:"Choisissez une catégorie",
+  all:"Toutes catégories",geo:"Géographie",science:"Sciences",
+  history:"Histoire",sport:"Sport",culture:"Culture",
+  tech:"Technologie",religion:"Religion",cinema:"Cinéma",
+  start:"🚀 Commencer",score:"Points",time:"Temps",
+  question:"Question",hint:"💡 Indice (-15)",type:"✍️ Écrire",
+  voice:"🎤 Voix",back:"Quitter",send:"Valider",
+  enter:"Écrivez votre réponse...",empty:"Écrivez une réponse.",
+  correct:"✅ Bonne réponse ! +10 points",
+  wrong:"❌ Mauvaise réponse !",
+  need:"Il vous faut 15 points pour utiliser l'indice.",
+  used:"Indice déjà utilisé pour cette question.",
+  timeout:"⏰ Temps écoulé !",
+  listening:"🎤 Je vous écoute...",
+  unsupported:"Reconnaissance vocale non prise en charge. Essayez Chrome.",
+  voiceError:"Erreur vocale. Vérifiez le microphone.",
+  notRecognized:"Réponse non reconnue. Essayez de l'écrire ou de choisir.",
+  result:"Quiz terminé !",again:"🔄 Rejouer",
+  home:"🏠 Accueil",
+  resultText:"Vous avez réussi {n} questions sur {total}.",
+  quit:"Voulez-vous quitter le quiz ?",q:"Question",of:"sur"
+ },
+ en:{
+  welcome:"Welcome to the Kingdom of Knowledge!",
+  intro:"Test your knowledge, earn points and become Quiz King!",
+  choose:"Choose a category",
+  all:"All categories",geo:"Geography",science:"Science",
+  history:"History",sport:"Sports",culture:"Culture",
+  tech:"Technology",religion:"Religion",cinema:"Movies",
+  start:"🚀 Start playing",score:"Points",time:"Time",
+  question:"Question",hint:"💡 Hint (-15)",type:"✍️ Type",
+  voice:"🎤 Voice",back:"Quit",send:"Submit answer",
+  enter:"Type your answer...",empty:"Type an answer first.",
+  correct:"✅ Correct answer! +10 points",
+  wrong:"❌ Wrong answer!",
+  need:"You need 15 points to use a hint.",
+  used:"You already used a hint for this question.",
+  timeout:"⏰ Time is up!",
+  listening:"🎤 Listening...",
+  unsupported:"Voice recognition isn't supported. Try Chrome.",
+  voiceError:"Voice error. Check microphone permissions.",
+  notRecognized:"Answer not recognized. Try typing or choosing.",
+  result:"Quiz complete!",again:"🔄 Play again",
+  home:"🏠 Home",
+  resultText:"You answered {n} out of {total} questions correctly.",
+  quit:"Do you want to quit the quiz?",q:"Question",of:"of"
+ }
 };
 
-
-/* =========================
-   CATEGORIES
-========================= */
-
-const categoryKeys=[
-"all",
-"geography",
-"science",
-"history",
-"sports",
-"movies",
-"series",
-"music",
-"religion",
-"culture",
-"technology",
-"image"
+const CATS = [
+ ["all","🌈"],["geo","🌍"],["science","🔬"],
+ ["history","🏛️"],["sport","⚽"],["culture","📚"],
+ ["tech","💻"],["religion","🕌"],["cinema","🎬"]
 ];
 
+// Each question contains localized question text and localized choices.
+const QUESTIONS = [
+ {c:"geo",q:{ar:"ما عاصمة الجزائر؟",fr:"Quelle est la capitale de l'Algérie ?",en:"What is the capital of Algeria?"},
+  a:{ar:["الجزائر","وهران","قسنطينة","عنابة"],fr:["Alger","Oran","Constantine","Annaba"],en:["Algiers","Oran","Constantine","Annaba"]},k:0},
+ {c:"geo",q:{ar:"ما أكبر محيط في العالم؟",fr:"Quel est le plus grand océan ?",en:"What is the largest ocean?"},
+  a:{ar:["الأطلسي","الهندي","الهادئ","المتجمد الشمالي"],fr:["Atlantique","Indien","Pacifique","Arctique"],en:["Atlantic","Indian","Pacific","Arctic"]},k:2},
+ {c:"geo",q:{ar:"في أي قارة تقع مصر؟",fr:"Sur quel continent se trouve l'Égypte ?",en:"Which continent is Egypt in?"},
+  a:{ar:["آسيا","إفريقيا","أوروبا","أمريكا"],fr:["Asie","Afrique","Europe","Amérique"],en:["Asia","Africa","Europe","America"]},k:1},
+ {c:"geo",q:{ar:"ما عاصمة اليابان؟",fr:"Quelle est la capitale du Japon ?",en:"What is the capital of Japan?"},
+  a:{ar:["بكين","سيول","طوكيو","بانكوك"],fr:["Pékin","Séoul","Tokyo","Bangkok"],en:["Beijing","Seoul","Tokyo","Bangkok"]},k:2},
+ {c:"science",q:{ar:"ما الكوكب المعروف بالكوكب الأحمر؟",fr:"Quelle planète est appelée la planète rouge ?",en:"Which planet is called the Red Planet?"},
+  a:{ar:["الزهرة","المريخ","المشتري","زحل"],fr:["Vénus","Mars","Jupiter","Saturne"],en:["Venus","Mars","Jupiter","Saturn"]},k:1},
+ {c:"science",q:{ar:"ما الغاز الذي تمتصه النباتات؟",fr:"Quel gaz les plantes absorbent-elles ?",en:"Which gas do plants absorb?"},
+  a:{ar:["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الهيدروجين"],fr:["Oxygène","Azote","Dioxyde de carbone","Hydrogène"],en:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"]},k:2},
+ {c:"science",q:{ar:"كم عدد أرجل العنكبوت؟",fr:"Combien de pattes a une araignée ?",en:"How many legs does a spider have?"},
+  a:{ar:["ست","ثماني","عشر","أربع"],fr:["Six","Huit","Dix","Quatre"],en:["Six","Eight","Ten","Four"]},k:1},
+ {c:"science",q:{ar:"ما العضو الذي يضخ الدم؟",fr:"Quel organe pompe le sang ?",en:"Which organ pumps blood?"},
+  a:{ar:["الرئة","الكبد","القلب","المعدة"],fr:["Poumon","Foie","Cœur","Estomac"],en:["Lung","Liver","Heart","Stomach"]},k:2},
+ {c:"history",q:{ar:"أين تقع أهرامات الجيزة؟",fr:"Où se trouvent les pyramides de Gizeh ?",en:"Where are the Giza pyramids?"},
+  a:{ar:["مصر","العراق","اليونان","المغرب"],fr:["Égypte","Irak","Grèce","Maroc"],en:["Egypt","Iraq","Greece","Morocco"]},k:0},
+ {c:"history",q:{ar:"من أول إنسان مشى على القمر؟",fr:"Qui fut le premier homme à marcher sur la Lune ?",en:"Who was the first person to walk on the Moon?"},
+  a:{ar:["يوري غاغارين","نيل أرمسترونغ","بز ألدرين","جون غلين"],fr:["Youri Gagarine","Neil Armstrong","Buzz Aldrin","John Glenn"],en:["Yuri Gagarin","Neil Armstrong","Buzz Aldrin","John Glenn"]},k:1},
+ {c:"history",q:{ar:"في أي بلد نشأت الألعاب الأولمبية القديمة؟",fr:"Dans quel pays les Jeux olympiques antiques sont-ils nés ?",en:"Where did the ancient Olympic Games originate?"},
+  a:{ar:["إيطاليا","اليونان","مصر","الصين"],fr:["Italie","Grèce","Égypte","Chine"],en:["Italy","Greece","Egypt","China"]},k:1},
+ {c:"sport",q:{ar:"كم لاعبًا من فريق واحد يبدأ مباراة كرة القدم؟",fr:"Combien de joueurs une équipe de football aligne-t-elle au départ ?",en:"How many players start a football match for one team?"},
+  a:{ar:["9","10","11","12"],fr:["9","10","11","12"],en:["9","10","11","12"]},k:2},
+ {c:"sport",q:{ar:"في أي رياضة يُستخدم المضرب والريشة؟",fr:"Dans quel sport utilise-t-on une raquette et un volant ?",en:"Which sport uses a racket and a shuttlecock?"},
+  a:{ar:["التنس","الريشة الطائرة","الاسكواش","كرة الطاولة"],fr:["Tennis","Badminton","Squash","Tennis de table"],en:["Tennis","Badminton","Squash","Table tennis"]},k:1},
+ {c:"sport",q:{ar:"كم حلقة في الشعار الأولمبي؟",fr:"Combien d'anneaux compte le symbole olympique ?",en:"How many rings are on the Olympic symbol?"},
+  a:{ar:["أربع","خمس","ست","سبع"],fr:["Quatre","Cinq","Six","Sept"],en:["Four","Five","Six","Seven"]},k:1},
+ {c:"culture",q:{ar:"كم يومًا في السنة الكبيسة؟",fr:"Combien de jours compte une année bissextile ?",en:"How many days are in a leap year?"},
+  a:{ar:["365","366","364","360"],fr:["365","366","364","360"],en:["365","366","364","360"]},k:1},
+ {c:"culture",q:{ar:"ما اللغة الرسمية في البرازيل؟",fr:"Quelle est la langue officielle du Brésil ?",en:"What is the official language of Brazil?"},
+  a:{ar:["الإسبانية","البرتغالية","الفرنسية","الإنجليزية"],fr:["Espagnol","Portugais","Français","Anglais"],en:["Spanish","Portuguese","French","English"]},k:1},
+ {c:"tech",q:{ar:"ماذا تعني CPU في الحاسوب؟",fr:"Que signifie CPU en informatique ?",en:"What does CPU stand for?"},
+  a:{ar:["وحدة المعالجة المركزية","ذاكرة الوصول","بطاقة الصوت","القرص الصلب"],fr:["Unité centrale de traitement","Mémoire vive","Carte son","Disque dur"],en:["Central Processing Unit","Random Access Memory","Sound Card","Hard Drive"]},k:0},
+ {c:"tech",q:{ar:"أي من هذه متصفح إنترنت؟",fr:"Lequel de ces éléments est un navigateur web ?",en:"Which of these is a web browser?"},
+  a:{ar:["Chrome","Excel","Windows","Bluetooth"],fr:["Chrome","Excel","Windows","Bluetooth"],en:["Chrome","Excel","Windows","Bluetooth"]},k:0},
+ {c:"religion",q:{ar:"كم عدد أركان الإسلام؟",fr:"Combien y a-t-il de piliers de l'islam ?",en:"How many pillars of Islam are there?"},
+  a:{ar:["ثلاثة","أربعة","خمسة","ستة"],fr:["Trois","Quatre","Cinq","Six"],en:["Three","Four","Five","Six"]},k:2},
+ {c:"religion",q:{ar:"ما الشهر الذي يصوم فيه المسلمون؟",fr:"Quel mois les musulmans jeûnent-ils ?",en:"During which month do Muslims fast?"},
+  a:{ar:["شوال","رمضان","محرم","رجب"],fr:["Chawwal","Ramadan","Mouharram","Rajab"],en:["Shawwal","Ramadan","Muharram","Rajab"]},k:1},
+ {c:"cinema",q:{ar:"ما اسم المدرسة التي يدرس فيها هاري بوتر؟",fr:"Comment s'appelle l'école de Harry Potter ?",en:"What is the name of Harry Potter's school?"},
+  a:{ar:["هوجورتس","نارنيا","كاميلوت","متروبوليس"],fr:["Poudlard","Narnia","Camelot","Métropolis"],en:["Hogwarts","Narnia","Camelot","Metropolis"]},k:0},
+ {c:"cinema",q:{ar:"أي شخصية كرتونية تعيش في أناناسة تحت البحر؟",fr:"Quel personnage vit dans un ananas sous la mer ?",en:"Which cartoon character lives in a pineapple under the sea?"},
+  a:{ar:["توم","سبونج بوب","ميكي ماوس","شريك"],fr:["Tom","Bob l'éponge","Mickey Mouse","Shrek"],en:["Tom","SpongeBob","Mickey Mouse","Shrek"]},k:1}
+];
 
-/* =========================
-   QUESTIONS
-========================= */
+let language = "ar";
+let selectedCategory = "all";
+let gameQuestions = [];
+let current = 0;
+let score = 0;
+let correctCount = 0;
+let answered = false;
+let hintUsed = false;
+let timerId = null;
+let timeLeft = 20;
+let typingMode = false;
+let voiceMode = false;
+let recognition = null;
 
-const questions=[
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
-{
-cat:"geography",
-q:{
-ar:"ما هي عاصمة الجزائر؟",
-fr:"Quelle est la capitale de l'Algérie ?",
-en:"What is the capital of Algeria?"
-},
-a:["الجزائر","وهران","قسنطينة","عنابة"],
-correct:0
-},
+function showPage(page) {
+  ["home","game","result"].forEach(id =>
+    $(id).classList.toggle("hidden", id !== page)
+  );
+}
 
-{
-cat:"geography",
-q:{
-ar:"ما هي عاصمة اليابان؟",
-fr:"Quelle est la capitale du Japon ?",
-en:"What is the capital of Japan?"
-},
-a:["طوكيو","بكين","سيول","بانكوك"],
-correct:0
-},
+function updateLanguage() {
+  language = $("language").value;
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+  const t = TXT[language];
 
-{
-cat:"geography",
-q:{
-ar:"ما أكبر محيط في العالم؟",
-fr:"Quel est le plus grand océan du monde ?",
-en:"What is the largest ocean?"
-},
-a:["الأطلسي","الهندي","الهادئ","المتجمد"],
-correct:2
-},
+  $("welcome").textContent = t.welcome;
+  $("intro").textContent = t.intro;
+  $("chooseCategory").textContent = t.choose;
+  $("startButton").textContent = t.start;
+  $("scoreLabel").textContent = t.score;
+  $("timeLabel").textContent = t.time;
+  $("questionLabel").textContent = t.question;
+  $("hintButton").textContent = t.hint;
+  $("typeButton").textContent = t.type;
+  $("voiceButton").textContent = t.voice;
+  $("backButton").textContent = t.back;
+  $("sendButton").textContent = t.send;
+  $("typedAnswer").placeholder = t.enter;
+  $("resultTitle").textContent = t.result;
+  $("againButton").textContent = t.again;
+  $("homeButton").textContent = t.home;
 
-{
-cat:"geography",
-q:{
-ar:"في أي قارة تقع الجزائر؟",
-fr:"Sur quel continent se trouve l'Algérie ?",
-en:"Which continent is Algeria in?"
-},
-a:["آسيا","أوروبا","أفريقيا","أمريكا"],
-correct:2
-},
+  renderCategories();
 
-{
-cat:"geography",
-q:{
-ar:"ما عاصمة فرنسا؟",
-fr:"Quelle est la capitale de la France ?",
-en:"What is the capital of France?"
-},
-a:["مدريد","باريس","روما","برلين"],
-correct:1
-},
+  if (!$("game").classList.contains("hidden") &&
+      current < gameQuestions.length) {
+    renderQuestion();
+  }
+}
 
+function renderCategories() {
+  const box = $("categories");
+  box.replaceChildren();
 
-{
-cat:"science",
-q:{
-ar:"ما أكبر كوكب في المجموعة الشمسية؟",
-fr:"Quelle est la plus grande planète ?",
-en:"What is the largest planet?"
-},
-a:["الأرض","المريخ","المشتري","الزهرة"],
-correct:2
-},
+  CATS.forEach(([key,icon]) => {
+    const button = document.createElement("button");
+    button.className = "category" +
+      (selectedCategory === key ? " active" : "");
+    button.innerHTML = `<span class="cat-icon">${icon}</span>`;
+    const label = document.createElement("span");
+    label.textContent = TXT[language][key];
+    button.appendChild(label);
 
-{
-cat:"science",
-q:{
-ar:"كم عدد الكواكب في المجموعة الشمسية؟",
-fr:"Combien y a-t-il de planètes ?",
-en:"How many planets are there?"
-},
-a:["7","8","9","10"],
-correct:1
-},
+    button.onclick = () => {
+      selectedCategory = key;
+      renderCategories();
+    };
+    box.appendChild(button);
+  });
+}
 
-{
-cat:"science",
-q:{
-ar:"ما الغاز الذي يحتاجه الإنسان للتنفس؟",
-fr:"Quel gaz les humains respirent-ils ?",
-en:"Which gas do humans need to breathe?"
-},
-a:["الأكسجين","الهيدروجين","الهيليوم","النيتروجين"],
-correct:0
-},
+function startGame() {
+  clearInterval(timerId);
+  score = 0;
+  current = 0;
+  correctCount = 0;
+  answered = false;
+  hintUsed = false;
+  typingMode = false;
+  voiceMode = false;
 
-{
-cat:"science",
-q:{
-ar:"ما أقرب كوكب إلى الشمس؟",
-fr:"Quelle planète est la plus proche du Soleil ?",
-en:"Which planet is closest to the Sun?"
-},
-a:["الأرض","عطارد","المريخ","زحل"],
-correct:1
-},
+  let pool = selectedCategory === "all"
+    ? QUESTIONS
+    : QUESTIONS.filter(q => q.c === selectedCategory);
 
-{
-cat:"science",
-q:{
-ar:"ما درجة تجمد الماء تقريبًا؟",
-fr:"À quelle température l'eau gèle-t-elle ?",
-en:"At what temperature does water freeze?"
-},
-a:["0°C","50°C","100°C","-50°C"],
-correct:0
-},
+  gameQuestions = shuffle(pool).slice(0, Math.min(10,pool.length));
 
+  if (!gameQuestions.length) {
+    alert("No questions available.");
+    return;
+  }
 
-{
-cat:"history",
-q:{
-ar:"أين توجد الأهرامات الشهيرة؟",
-fr:"Où se trouvent les célèbres pyramides ?",
-en:"Where are the famous pyramids?"
-},
-a:["مصر","الجزائر","المغرب","تونس"],
-correct:0
-},
+  showPage("game");
+  $("score").textContent = score;
+  $("message").textContent = "";
+  $("typingArea").classList.add("hidden");
+  renderQuestion();
+}
 
-{
-cat:"history",
-q:{
-ar:"من بنى الكولوسيوم؟",
-fr:"Qui a construit le Colisée ?",
-en:"Who built the Colosseum?"
-},
-a:["الرومان","الفراعنة","الفينيقيون","المغول"],
-correct:0
-},
+function renderQuestion() {
+  clearInterval(timerId);
 
-{
-cat:"history",
-q:{
-ar:"أين نشأت الألعاب الأولمبية القديمة؟",
-fr:"Où sont nés les Jeux olympiques antiques ?",
-en:"Where did the ancient Olympics originate?"
-},
-a:["اليونان","مصر","الصين","روما"],
-correct:0
-},
+  if (current >= gameQuestions.length) {
+    finishGame();
+    return;
+  }
 
-{
-cat:"history",
-q:{
-ar:"ما الحضارة التي بنت الأهرامات في الجيزة؟",
-fr:"Quelle civilisation a construit les pyramides de Gizeh ?",
-en:"Which civilization built the pyramids of Giza?"
-},
-a:["المصرية القديمة","الرومانية","الصينية","الفارسية"],
-correct:0
-},
+  answered = false;
+  hintUsed = false;
+  timeLeft = 20;
+  typingMode = false;
+  $("typingArea").classList.add("hidden");
+  $("typedAnswer").value = "";
+  $("message").textContent = "";
+  $("timer").textContent = timeLeft;
+  $("counter").textContent =
+    `${current + 1}/${gameQuestions.length}`;
+  $("progressBar").style.width =
+    `${current / gameQuestions.length * 100}%`;
+  $("questionNumber").textContent =
+    `${TXT[language].q} ${current + 1} ${TXT[language].of} ${gameQuestions.length}`;
 
-
-{
-cat:"sports",
-q:{
-ar:"كم لاعبًا في فريق كرة القدم داخل الملعب؟",
-fr:"Combien de joueurs sur le terrain au football ?",
-en:"How many players are on a football team on the field?"
-},
-a:["9","10","11","12"],
-correct:2
-},
-
-{
-cat:"sports",
-q:{
-ar:"في أي رياضة تستخدم كرة صفراء ومضرب؟",
-fr:"Quel sport utilise une balle jaune et une raquette ?",
+  const q = gameQuestions[current];
+  et une raquette ?",
 en:"Which sport uses a yellow ball and racket?"
 },
 a:["التنس","الملاكمة","السباحة","الجودو"],
