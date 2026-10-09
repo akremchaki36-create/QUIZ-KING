@@ -2,1620 +2,830 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10152f">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101326">
 <title>QUIZ KING 👑</title>
 
 <style>
 :root {
-  --bg:#10152f;
-  --panel:#1b2346;
-  --blue:#536dfe;
-  --gold:#ffd166;
-  --text:#ffffff;
-  --muted:#b9c3e8;
-  --green:#31d69b;
-  --red:#ff647c;
+  --bg: #101326;
+  --card: #1b203b;
+  --gold: #ffd166;
+  --blue: #536dfe;
+  --green: #38d996;
+  --red: #ff637d;
+  --text: #f6f7ff;
+  --muted: #aeb5d0;
 }
-* { box-sizing:border-box; }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin:0;
-  min-height:100vh;
-  font-family:Arial,Tahoma,sans-serif;
-  background:radial-gradient(ellipse at top,#28376b,var(--bg) 65%);
-  color:var(--text);
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
 }
-button,input,select { font:inherit; }
+
+button, select {
+  font: inherit;
+}
+
 button {
-  border:0;
-  border-radius:13px;
-  padding:13px 16px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:transform .15s,opacity .15s;
+  cursor: pointer;
+  border: none;
+  transition: .2s;
 }
-button:active { transform:scale(.98); }
-button:disabled { cursor:not-allowed;opacity:.65; }
-.app {
-  width:min(100% - 24px,680px);
-  margin:auto;
-  padding:18px 0 36px;
+
+button:active {
+  transform: scale(.97);
 }
+
 header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:22px;
+  padding: 20px 15px;
+  text-align: center;
+  background: linear-gradient(135deg,#20264c,#101326);
+  border-bottom: 1px solid #343958;
 }
+
 .logo {
-  font-size:clamp(22px,6vw,32px);
-  font-weight:900;
-  color:var(--gold);
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 1px;
 }
-.logo small {
-  display:block;
-  font-size:11px;
-  color:var(--muted);
-  letter-spacing:3px;
-  margin-top:4px;
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 7px;
+  font-size: 13px;
 }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 850px;
+  margin: 15px auto;
+  padding: 0 12px;
+}
+
+.badge {
+  background: var(--card);
+  padding: 10px 13px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
 select {
-  max-width:145px;
-  padding:10px;
-  border:1px solid #465280;
-  background:var(--panel);
-  color:white;
-  border-radius:10px;
+  background: var(--card);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #444b70;
 }
-.card {
-  background:rgba(27,35,70,.96);
-  border:1px solid #35416e;
-  border-radius:23px;
-  padding:22px;
-  box-shadow:0 15px 45px #0003;
+
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 10px 14px 40px;
 }
-h1,h2,p { margin-top:0; }
-h1 { font-size:clamp(25px,7vw,38px); }
-h2 { font-size:22px; }
-.subtitle { color:var(--muted);line-height:1.8; }
-.hero {
-  text-align:center;
-  padding:28px 18px;
+
+.panel {
+  background: var(--card);
+  border: 1px solid #303758;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 18px;
 }
-.crown { font-size:65px;margin-bottom:12px; }
+
+h2 {
+  margin-top: 0;
+  font-size: 21px;
+}
+
+p {
+  line-height: 1.7;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 12px;
+}
+
+.game-card {
+  background: #252b4c;
+  color: white;
+  border: 1px solid #3b436c;
+  border-radius: 16px;
+  padding: 18px 10px;
+  text-align: center;
+  min-height: 120px;
+}
+
+.game-card:hover {
+  background: #30385f;
+  border-color: var(--gold);
+}
+
+.game-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.game-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.game-card small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .primary {
-  background:linear-gradient(135deg,#7186ff,#536dfe);
-  color:white;
+  background: linear-gradient(135deg,#697cff,#4657df);
+  color: white;
+  padding: 13px 18px;
+  border-radius: 12px;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
 }
-.gold {
-  background:var(--gold);
-  color:#25203c;
-}
+
 .secondary {
-  background:#303b69;
-  color:white;
-  border:1px solid #465586;
+  background: #303754;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
 }
-.danger {
-  background:#57283f;
-  color:white;
+
+.gold-btn {
+  background: var(--gold);
+  color: #18192c;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: bold;
 }
-.full { width:100%;margin-top:14px; }
-.categories {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-  margin:18px 0;
-}
-.category {
-  min-height:70px;
-  background:#252f59;
-  border:1px solid #3c4b7e;
-  color:white;
-  text-align:start;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.category.active {
-  border:2px solid var(--gold);
-  background:#39416b;
-}
-.cat-icon { font-size:25px; }
-.hidden { display:none!important; }
-.stats {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-bottom:18px;
-}
-.stat {
-  background:#252e55;
-  padding:12px 6px;
-  text-align:center;
-  border-radius:13px;
-}
-.stat strong {
-  display:block;
-  font-size:22px;
-  color:var(--gold);
-  margin-bottom:5px;
-}
-.stat span { color:var(--muted);font-size:12px; }
-.progress {
-  height:7px;
-  background:#394267;
-  border-radius:9px;
-  overflow:hidden;
-  margin-bottom:18px;
-}
-#progressBar {
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--blue),var(--gold));
-  transition:width .3s;
-}
-.question-number { color:var(--gold);font-weight:bold; }
-#question {
-  font-size:clamp(20px,5.5vw,27px);
-  line-height:1.65;
-  margin:14px 0 20px;
-}
+
 .answers {
-  display:grid;
-  gap:10px;
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 10px;
+  margin-top: 18px;
 }
+
 .answer {
-  width:100%;
-  text-align:start;
-  background:#29345e;
-  color:white;
-  border:1px solid #44517f;
-  line-height:1.5;
+  background: #282f50;
+  color: white;
+  border: 1px solid #414a70;
+  border-radius: 12px;
+  padding: 15px 8px;
+  min-height: 55px;
+  overflow-wrap: anywhere;
 }
+
 .answer.correct {
-  background:#155b4a;
-  border-color:var(--green);
+  background: #145e49;
+  border-color: var(--green);
 }
+
 .answer.wrong {
-  background:#692b43;
-  border-color:var(--red);
+  background: #6b293c;
+  border-color: var(--red);
 }
-.answer.gone { visibility:hidden; }
-.actions {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
-  margin-top:15px;
+
+.answer:disabled {
+  cursor: default;
 }
-.actions button { padding:12px 8px; }
-#message {
-  min-height:30px;
-  line-height:1.7;
-  margin:14px 0 0;
-  color:var(--gold);
-  text-align:center;
+
+.question-image {
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+  background: #12162b;
+  border-radius: 16px;
+  display: block;
+  margin: 15px auto;
 }
-#typingArea { margin-top:14px; }
-#typedAnswer {
-  width:100%;
-  padding:13px;
-  background:#101832;
-  color:white;
-  border:1px solid #53618c;
-  border-radius:12px;
-  margin-bottom:9px;
+
+.clue-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 10px;
+  margin: 15px 0;
 }
-.result { text-align:center; }
-.result-icon { font-size:65px; }
-.final-score {
-  color:var(--gold);
-  font-size:48px;
-  font-weight:900;
-  margin:18px;
+
+.clue {
+  background: #12162b;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
 }
+
+.clue img {
+  width: 100%;
+  height: 90px;
+  object-fit: contain;
+}
+
+.clue small {
+  display: block;
+  color: var(--muted);
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.progress {
+  height: 7px;
+  background: #343b5d;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--gold);
+  transition: width .3s;
+}
+
+.feedback {
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 12px;
+  display: none;
+}
+
+.feedback.show {
+  display: block;
+}
+
+.hint {
+  background: #3a3156;
+  color: #f5d8ff;
+}
+
+.success {
+  background: #145e49;
+}
+
+.error {
+  background: #6b293c;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.menu-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.menu-row button {
+  flex: 1;
+  min-width: 100px;
+}
+
 footer {
-  text-align:center;
-  color:#8895c2;
-  font-size:12px;
-  margin-top:20px;
+  text-align: center;
+  color: #747d9f;
+  padding: 20px;
+  font-size: 12px;
 }
-@media(max-width:360px) {
-  .card { padding:15px; }
-  .categories { gap:7px; }
-  .category { padding:10px 7px; }
+
+#timer {
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.memory-card {
+  height: 75px;
+  border-radius: 12px;
+  background: #343d68;
+  color: white;
+  font-size: 27px;
+}
+
+.memory-card.open {
+  background: #f2f3ff;
+  color: #161a30;
+}
+
+.memory-card.matched {
+  background: #145e49;
+}
+
+.ttt-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+.ttt-cell {
+  height: 85px;
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  background: #303858;
+  border-radius: 12px;
+}
+
+@media (max-width: 420px) {
+  .question-image {
+    height: 220px;
+  }
+
+  .panel {
+    padding: 14px;
+  }
+
+  .game-card {
+    padding: 14px 7px;
+  }
+
+  .answers {
+    gap: 8px;
+  }
+
+  .answer {
+    padding: 12px 6px;
+    font-size: 14px;
+  }
 }
 </style>
 </head>
 
 <body>
-<div class="app">
 
 <header>
-  <div class="logo">👑 QUIZ KING<small>THINK • PLAY • WIN</small></div>
-  <select id="language" aria-label="Language">
+  <div class="logo">👑 QUIZ KING</div>
+  <div class="subtitle" id="subtitle">
+    اختبر ذكاءك، اكتشف الصور، وكن ملك المعرفة!
+  </div>
+</header>
+
+<div class="topbar">
+  <div class="badge">⭐ <span id="points">0</span> نقطة</div>
+  <div class="badge">🏆 المستوى <span id="level">1</span></div>
+
+  <select id="language" onchange="changeLanguage()">
     <option value="ar">العربية</option>
     <option value="fr">Français</option>
     <option value="en">English</option>
   </select>
-</header>
-
-<section id="home" class="card">
-  <div class="hero">
-    <div class="crown">👑</div>
-    <h1 id="welcome"></h1>
-    <p id="intro" class="subtitle"></p>
-  </div>
-
-  <h2 id="chooseCategory"></h2>
-  <div id="categories" class="categories"></div>
-
-  <button id="startButton" class="primary full"></button>
-</section>
-
-<section id="game" class="card hidden">
-  <div class="stats">
-    <div class="stat">
-      <strong id="score">0</strong>
-      <span id="scoreLabel"></span>
-    </div>
-    <div class="stat">
-      <strong id="timer">20</strong>
-      <span id="timeLabel"></span>
-    </div>
-    <div class="stat">
-      <strong id="counter">1/10</strong>
-      <span id="questionLabel"></span>
-    </div>
-  </div>
-
-  <div class="progress"><div id="progressBar"></div></div>
-
-  <div class="question-number" id="questionNumber"></div>
-  <div id="question"></div>
-  <div id="answers" class="answers"></div>
-
-  <div class="actions">
-    <button id="hintButton" class="gold"></button>
-    <button id="typeButton" class="secondary"></button>
-    <button id="voiceButton" class="secondary"></button>
-    <button id="backButton" class="danger"></button>
-  </div>
-
-  <div id="typingArea" class="hidden">
-    <input id="typedAnswer" autocomplete="off">
-    <button id="sendButton" class="primary full"></button>
-  </div>
-
-  <p id="message" aria-live="polite"></p>
-</section>
-
-<section id="result" class="card result hidden">
-  <div class="result-icon">🏆</div>
-  <h1 id="resultTitle"></h1>
-  <p id="resultText" class="subtitle"></p>
-  <div class="final-score" id="finalScore">0</div>
-  <button id="againButton" class="primary full"></button>
-  <button id="homeButton" class="secondary full"></button>
-</section>
-
-<footer>QUIZ KING 👑 — Learn something new every day</footer>
 </div>
+
+<main>
+
+  <section id="home">
+
+    <div class="panel">
+      <h2 id="welcome">مرحبًا بك في QUIZ KING! 👑</h2>
+      <p class="muted" id="welcomeText">
+        ابدأ بالمستوى المتوسط، ثم انتقل تدريجيًا إلى الأسئلة الصعبة جدًا.
+        اجمع النقاط واستخدمها للحصول على التلميحات.
+      </p>
+
+      <div class="grid">
+
+        <button class="game-card" onclick="startQuiz('general')">
+          <span class="game-icon">🧠</span>
+          <strong id="gameGeneral">المعرفة العامة</strong>
+          <small id="descGeneral">علوم، تاريخ، جغرافيا وثقافة</small>
+        </button>
+
+        <button class="game-card" onclick="startQuiz('actors')">
+          <span class="game-icon">🎬</span>
+          <strong id="gameActors">تحدي الممثلين</strong>
+          <small id="descActors">تعرف على الشخصية من صورتها</small>
+        </button>
+
+        <button class="game-card" onclick="startQuiz('football')">
+          <span class="game-icon">⚽</span>
+          <strong id="gameFootball">تحدي كرة القدم</strong>
+          <small id="descFootball">اللاعبون والأندية ومسيرتهم</small>
+        </button>
+
+        <button class="game-card" onclick="startQuiz('places')">
+          <span class="game-icon">🌍</span>
+          <strong id="gamePlaces">معالم العالم</strong>
+          <small id="descPlaces">تعرف على الأماكن من صورها</small>
+        </button>
+
+        <button class="game-card" onclick="startQuiz('flags')">
+          <span class="game-icon">🏳️</span>
+          <strong id="gameFlags">تحدي الأعلام</strong>
+          <small id="descFlags">اكتشف الدولة من علمها</small>
+        </button>
+
+        <button class="game-card" onclick="startQuiz('cars')">
+          <span class="game-icon">🚗</span>
+          <strong id="gameCars">تحدي السيارات</strong>
+          <small id="descCars">ماركات السيارات وشعاراتها</small>
+        </button>
+
+        <button class="game-card" onclick="startWho()">
+          <span class="game-icon">🕵️</span>
+          <strong id="gameWho">من أنا؟</strong>
+          <small id="descWho">استنتج الشخصية من التلميحات</small>
+        </button>
+
+        <button class="game-card" onclick="startMemory()">
+          <span class="game-icon">🧩</span>
+          <strong id="gameMemory">لعبة الذاكرة</strong>
+          <small id="descMemory">اعثر على البطاقات المتشابهة</small>
+        </button>
+
+        <button class="game-card" onclick="startTicTacToe()">
+          <span class="game-icon">⭕</span>
+          <strong id="gameTic">إكس أو</strong>
+          <small id="descTic">العب ضد الكمبيوتر</small>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2 id="profileTitle">📊 إحصائياتي</h2>
+      <p id="stats">الإجابات الصحيحة: 0 | الأسئلة المجاب عنها: 0</p>
+      <button class="secondary" onclick="resetStats()" id="resetBtn">
+        إعادة ضبط النقاط والإحصائيات
+      </button>
+    </div>
+
+  </section>
+
+  <section id="quiz" class="hidden">
+
+    <div class="panel">
+
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <span class="badge" id="categoryLabel">المعرفة العامة</span>
+        <span class="badge" id="difficulty">متوسط</span>
+        <span class="badge">⏱️ <span id="timer">30</span></span>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <p class="muted" id="questionNumber">السؤال 1</p>
+
+      <h2 id="questionText">السؤال يظهر هنا</h2>
+
+      <div id="imageArea"></div>
+
+      <div id="answers" class="answers"></div>
+
+      <div id="feedback" class="feedback"></div>
+
+      <div class="menu-row">
+        <button class="gold-btn" onclick="useHint()" id="hintBtn">
+          💡 تلميح (3 نقاط)
+        </button>
+
+        <button class="secondary" onclick="skipQuestion()" id="skipBtn">
+          تخطي السؤال
+        </button>
+      </div>
+
+      <div class="menu-row">
+        <button class="secondary" onclick="backHome()" id="homeBtn">
+          🏠 الرئيسية
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="panel" style="text-align:center">
+      <div style="font-size:60px">🏆</div>
+      <h2 id="resultTitle">انتهت الجولة!</h2>
+      <p id="resultText"></p>
+      <button class="primary" onclick="backHome()" id="resultHome">
+        العودة إلى الرئيسية
+      </button>
+      <button class="gold-btn" onclick="restartQuiz()" id="restartBtn">
+        جولة جديدة
+      </button>
+    </div>
+  </section>
+
+  <section id="memory" class="hidden">
+    <div class="panel">
+      <h2 id="memoryTitle">🧩 لعبة الذاكرة</h2>
+      <p id="memoryText">اعثر على كل زوج متشابه.</p>
+      <div class="memory-grid" id="memoryGrid"></div>
+      <p id="memoryStatus"></p>
+      <button class="primary" onclick="startMemory()" id="memoryAgain">
+        إعادة اللعب
+      </button>
+      <button class="secondary" onclick="backHome()" id="memoryHome">
+        الرئيسية
+      </button>
+    </div>
+  </section>
+
+  <section id="ttt" class="hidden">
+    <div class="panel">
+      <h2 id="tttTitle">⭕ إكس أو</h2>
+      <p id="tttStatus">أنت X والكمبيوتر O</p>
+      <div class="ttt-grid" id="tttGrid"></div>
+      <button class="primary" onclick="startTicTacToe()" id="tttAgain">
+        مباراة جديدة
+      </button>
+      <button class="secondary" onclick="backHome()" id="tttHome">
+        الرئيسية
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  QUIZ KING 👑 — Learn, Play, Win!
+</footer>
 
 <script>
 "use strict";
 
-const $ = id => document.getElementById(id);
+/*
+ * الصور: تُجلب من ويكيبيديا عند توفر الاتصال.
+ * الأسئلة النصية تعمل حتى إذا تعذر تحميل الصورة.
+ * هذا الإصدار لا يحتوي على غرف إنترنت متعددة اللاعبين.
+ */
 
-const TXT = {
- ar:{
-  welcome:"مرحبًا بك في مملكة المعرفة!",
-  intro:"اختبر معلوماتك، اجمع النقاط، وكن ملك المسابقات!",
-  choose:"اختر مجال الأسئلة",
-  all:"جميع المجالات",geo:"الجغرافيا",science:"العلوم",
-  history:"التاريخ",sport:"الرياضة",culture:"الثقافة",
-  tech:"التكنولوجيا",religion:"الدين",cinema:"الأفلام",
-  start:"🚀 ابدأ اللعب",score:"النقاط",time:"الوقت",
-  question:"السؤال",hint:"💡 تلميح (-15)",type:"✍️ كتابة",
-  voice:"🎤 صوت",back:"خروج",send:"تأكيد الإجابة",
-  enter:"اكتب إجابتك هنا...",empty:"اكتب إجابتك أولًا.",
-  correct:"✅ إجابة صحيحة! +10 نقاط",
-  wrong:"❌ إجابة خاطئة!",
-  need:"تحتاج إلى 15 نقطة لاستخدام التلميح.",
-  used:"لقد استخدمت التلميح لهذا السؤال.",
-  timeout:"⏰ انتهى الوقت!",
-  listening:"🎤 أستمع إليك الآن...",
-  unsupported:"التعرف الصوتي غير مدعوم. جرّب Chrome.",
-  voiceError:"تعذر التعرف على الصوت. تحقق من إذن الميكروفون.",
-  notRecognized:"لم أتعرف على الإجابة. حاول كتابتها أو اختيارها.",
-  result:"انتهت المسابقة!",again:"🔄 العب مجددًا",
-  home:"🏠 الصفحة الرئيسية",
-  resultText:"أجبت إجابة صحيحة عن {n} من أصل {total} سؤالًا.",
-  quit:"هل تريد الخروج من المسابقة؟",
-  q:"السؤال",of:"من"
- },
- fr:{
-  welcome:"Bienvenue dans le royaume du savoir !",
-  intro:"Testez vos connaissances et devenez le roi du quiz !",
-  choose:"Choisissez une catégorie",
-  all:"Toutes catégories",geo:"Géographie",science:"Sciences",
-  history:"Histoire",sport:"Sport",culture:"Culture",
-  tech:"Technologie",religion:"Religion",cinema:"Cinéma",
-  start:"🚀 Commencer",score:"Points",time:"Temps",
-  question:"Question",hint:"💡 Indice (-15)",type:"✍️ Écrire",
-  voice:"🎤 Voix",back:"Quitter",send:"Valider",
-  enter:"Écrivez votre réponse...",empty:"Écrivez une réponse.",
-  correct:"✅ Bonne réponse ! +10 points",
-  wrong:"❌ Mauvaise réponse !",
-  need:"Il vous faut 15 points pour utiliser l'indice.",
-  used:"Indice déjà utilisé pour cette question.",
-  timeout:"⏰ Temps écoulé !",
-  listening:"🎤 Je vous écoute...",
-  unsupported:"Reconnaissance vocale non prise en charge. Essayez Chrome.",
-  voiceError:"Erreur vocale. Vérifiez le microphone.",
-  notRecognized:"Réponse non reconnue. Essayez de l'écrire ou de choisir.",
-  result:"Quiz terminé !",again:"🔄 Rejouer",
-  home:"🏠 Accueil",
-  resultText:"Vous avez réussi {n} questions sur {total}.",
-  quit:"Voulez-vous quitter le quiz ?",q:"Question",of:"sur"
- },
- en:{
-  welcome:"Welcome to the Kingdom of Knowledge!",
-  intro:"Test your knowledge, earn points and become Quiz King!",
-  choose:"Choose a category",
-  all:"All categories",geo:"Geography",science:"Science",
-  history:"History",sport:"Sports",culture:"Culture",
-  tech:"Technology",religion:"Religion",cinema:"Movies",
-  start:"🚀 Start playing",score:"Points",time:"Time",
-  question:"Question",hint:"💡 Hint (-15)",type:"✍️ Type",
-  voice:"🎤 Voice",back:"Quit",send:"Submit answer",
-  enter:"Type your answer...",empty:"Type an answer first.",
-  correct:"✅ Correct answer! +10 points",
-  wrong:"❌ Wrong answer!",
-  need:"You need 15 points to use a hint.",
-  used:"You already used a hint for this question.",
-  timeout:"⏰ Time is up!",
-  listening:"🎤 Listening...",
-  unsupported:"Voice recognition isn't supported. Try Chrome.",
-  voiceError:"Voice error. Check microphone permissions.",
-  notRecognized:"Answer not recognized. Try typing or choosing.",
-  result:"Quiz complete!",again:"🔄 Play again",
-  home:"🏠 Home",
-  resultText:"You answered {n} out of {total} questions correctly.",
-  quit:"Do you want to quit the quiz?",q:"Question",of:"of"
- }
+const translations = {
+  ar: {
+    subtitle: "اختبر ذكاءك، اكتشف الصور، وكن ملك المعرفة!",
+    welcome: "مرحبًا بك في QUIZ KING! 👑",
+    welcomeText: "ابدأ بالمستوى المتوسط، ثم انتقل تدريجيًا إلى الأسئلة الصعبة جدًا. اجمع النقاط واستخدمها للحصول على التلميحات.",
+    general: "المعرفة العامة",
+    descGeneral: "علوم، تاريخ، جغرافيا وثقافة",
+    actors: "تحدي الممثلين",
+    descActors: "تعرف على الشخصية من صورتها",
+    football: "تحدي كرة القدم",
+    descFootball: "اللاعبون والأندية ومسيرتهم",
+    places: "معالم العالم",
+    descPlaces: "تعرف على الأماكن من صورها",
+    flags: "تحدي الأعلام",
+    descFlags: "اكتشف الدولة من علمها",
+    cars: "تحدي السيارات",
+    descCars: "ماركات السيارات وشعاراتها",
+    who: "من أنا؟",
+    descWho: "استنتج الشخصية من التلميحات",
+    memory: "لعبة الذاكرة",
+    descMemory: "اعثر على البطاقات المتشابهة",
+    tic: "إكس أو",
+    descTic: "العب ضد الكمبيوتر",
+    profile: "📊 إحصائياتي",
+    reset: "إعادة ضبط النقاط والإحصائيات",
+    hint: "💡 تلميح (3 نقاط)",
+    skip: "تخطي السؤال",
+    home: "🏠 الرئيسية",
+    medium: "متوسط",
+    mediumHigh: "متوسط مرتفع",
+    hard: "صعب",
+    veryHard: "صعب جدًا",
+    question: "السؤال",
+    points: "نقطة",
+    correct: "إجابة صحيحة! أحسنت!",
+    wrong: "إجابة غير صحيحة.",
+    noPoints: "لا تملك نقاطًا كافية للحصول على تلميح.",
+    hintUsed: "التلميح",
+    noHint: "لا يوجد تلميح متاح.",
+    timeout: "انتهى الوقت!",
+    next: "السؤال التالي",
+    finish: "عرض النتيجة",
+    result: "انتهت الجولة!",
+    correctCount: "الإجابات الصحيحة",
+    answered: "الأسئلة المجاب عنها",
+    earned: "النقاط المكتسبة في الجولة",
+    playAgain: "جولة جديدة",
+    resultHome: "العودة إلى الرئيسية",
+    memoryText: "اعثر على كل زوج متشابه.",
+    memoryAgain: "إعادة اللعب",
+    memoryHome: "الرئيسية",
+    memoryWin: "ممتاز! لقد وجدت جميع الأزواج وحصلت على 10 نقاط.",
+    memoryStatus: "الأزواج المكتشفة",
+    tttStatus: "أنت X والكمبيوتر O",
+    tttAgain: "مباراة جديدة",
+    tttHome: "الرئيسية",
+    win: "لقد فزت! +5 نقاط",
+    lose: "فاز الكمبيوتر!",
+    draw: "تعادل!",
+    needAnswer: "اختر إجابة أولًا.",
+    imageError: "تعذر تحميل الصورة. حاول مجددًا عند توفر الإنترنت.",
+    whoHint: "تلميح إضافي",
+    whoReveal: "إظهار الإجابة",
+    whoCorrect: "إجابة صحيحة! +10 نقاط",
+    whoWrong: "انتهت الجولة.",
+    resetConfirm: "هل تريد حذف جميع النقاط والإحصائيات؟",
+    noQuestions: "لا توجد أسئلة في هذا القسم حاليًا.",
+    source: "مصدر الصورة: ويكيبيديا"
+  },
+
+  fr: {
+    subtitle: "Testez votre intelligence et devenez le roi du savoir !",
+    welcome: "Bienvenue dans QUIZ KING ! 👑",
+    welcomeText: "Commencez par le niveau moyen et progressez vers les questions très difficiles.",
+    general: "Culture générale",
+    descGeneral: "Sciences, histoire et géographie",
+    actors: "Défi des acteurs",
+    descActors: "Reconnaissez les célébrités",
+    football: "Défi football",
+    descFootball: "Joueurs, clubs et carrières",
+    places: "Monuments du monde",
+    descPlaces: "Reconnaissez les lieux",
+    flags: "Défi des drapeaux",
+    descFlags: "Devinez le pays",
+    cars: "Défi automobile",
+    descCars: "Marques et logos",
+    who: "Qui suis-je ?",
+    descWho: "Trouvez la personne grâce aux indices",
+    memory: "Jeu de mémoire",
+    descMemory: "Retrouvez les paires",
+    tic: "Morpion",
+    descTic: "Jouez contre l'ordinateur",
+    profile: "📊 Mes statistiques",
+    reset: "Réinitialiser les statistiques",
+    hint: "💡 Indice (3 points)",
+    skip: "Passer",
+    home: "🏠 Accueil",
+    medium: "Moyen",
+    mediumHigh: "Moyen élevé",
+    hard: "Difficile",
+    veryHard: "Très difficile",
+    question: "Question",
+    points: "points",
+    correct: "Bonne réponse ! Bravo !",
+    wrong: "Mauvaise réponse.",
+    noPoints: "Vous n'avez pas assez de points.",
+    hintUsed: "Indice",
+    noHint: "Aucun indice disponible.",
+    timeout: "Temps écoulé !",
+    next: "Question suivante",
+    finish: "Voir le résultat",
+    result: "Partie terminée !",
+    correctCount: "Bonnes réponses",
+    answered: "Questions répondues",
+    earned: "Points gagnés pendant la partie",
+    playAgain: "Nouvelle partie",
+    resultHome: "Retour à l'accueil",
+    memoryText: "Retrouvez toutes les paires.",
+    memoryAgain: "Rejouer",
+    memoryHome: "Accueil",
+    memoryWin: "Excellent ! Toutes les paires sont trouvées. +10 points.",
+    memoryStatus: "Paires trouvées",
+    tttStatus: "Vous êtes X, ordinateur O",
+    tttAgain: "Nouvelle partie",
+    tttHome: "Accueil",
+    win: "Vous avez gagné ! +5 points",
+    lose: "L'ordinateur a gagné !",
+    draw: "Match nul !",
+    needAnswer: "Choisissez une réponse.",
+    imageError: "Image indisponible. Vérifiez votre connexion.",
+    whoHint: "Indice supplémentaire",
+    whoReveal: "Révéler la réponse",
+    whoCorrect: "Bonne réponse ! +10 points",
+    whoWrong: "Partie terminée.",
+    resetConfirm: "Supprimer tous les points et statistiques ?",
+    noQuestions: "Aucune question disponible.",
+    source: "Source de l'image : Wikipédia"
+  },
+
+  en: {
+    subtitle: "Test your knowledge, discover images, and become the Quiz King!",
+    welcome: "Welcome to QUIZ KING! 👑",
+    welcomeText: "Start at medium difficulty and gradually progress to very difficult questions.",
+    general: "General Knowledge",
+    descGeneral: "Science, history and geography",
+    actors: "Actor Challenge",
+    descActors: "Identify famous actors",
+    football: "Football Challenge",
+    descFootball: "Players, clubs and careers",
+    places: "World Landmarks",
+    descPlaces: "Identify places from images",
+    flags: "Flag Challenge",
+    descFlags: "Guess the country",
+    cars: "Car Challenge",
+    descCars: "Car brands and logos",
+    who: "Who Am I?",
+    descWho: "Guess the person from clues",
+    memory: "Memory Game",
+    descMemory: "Find matching cards",
+    tic: "Tic-Tac-Toe",
+    descTic: "Play against the computer",
+    profile: "📊 My Statistics",
+    reset: "Reset points and statistics",
+    hint: "💡 Hint (3 points)",
+    skip: "Skip question",
+    home: "🏠 Home",
+    medium: "Medium",
+    mediumHigh: "Medium-Hard",
+    hard: "Hard",
+    veryHard: "Very Hard",
+    question: "Question",
+    points: "points",
+    correct: "Correct answer! Well done!",
+    wrong: "Incorrect answer.",
+    noPoints: "Not enough points for a hint.",
+    hintUsed: "Hint",
+    noHint: "No hint available.",
+    timeout: "Time is up!",
+    next: "Next question",
+    finish: "View results",
+    result: "Round complete!",
+    correctCount: "Correct answers",
+    answered: "Questions answered",
+    earned: "Points earned this round",
+    playAgain: "New round",
+    resultHome: "Back to home",
+    memoryText: "Find all matching pairs.",
+    memoryAgain: "Play again",
+    memoryHome: "Home",
+    memoryWin: "Excellent! All pairs found. +10 points.",
+    memoryStatus: "Pairs found",
+    tttStatus: "You are X, computer is O",
+    tttAgain: "New game",
+    tttHome: "Home",
+    win: "You won! +5 points",
+    lose: "Computer won!",
+    draw: "It's a draw!",
+    needAnswer: "Choose an answer first.",
+    imageError: "Image unavailable. Check your internet connection.",
+    whoHint: "Extra hint",
+    whoReveal: "Reveal answer",
+    whoCorrect: "Correct! +10 points",
+    whoWrong: "Round complete.",
+    resetConfirm: "Delete all points and statistics?",
+    noQuestions: "No questions available.",
+    source: "Image source: Wikipedia"
+  }
 };
 
-const CATS = [
- ["all","🌈"],["geo","🌍"],["science","🔬"],
- ["history","🏛️"],["sport","⚽"],["culture","📚"],
- ["tech","💻"],["religion","🕌"],["cinema","🎬"]
-];
+let lang = localStorage.getItem("qk_language") || "ar";
+let points = Number(localStorage.getItem("qk_points") || 0);
+let totalCorrect = Number(localStorage.getItem("qk_correct") || 0);
+let totalAnswered = Number(localStorage.getItem("qk_answered") || 0);
 
-// Each question contains localized question text and localized choices.
-const QUESTIONS = [
- {c:"geo",q:{ar:"ما عاصمة الجزائر؟",fr:"Quelle est la capitale de l'Algérie ?",en:"What is the capital of Algeria?"},
-  a:{ar:["الجزائر","وهران","قسنطينة","عنابة"],fr:["Alger","Oran","Constantine","Annaba"],en:["Algiers","Oran","Constantine","Annaba"]},k:0},
- {c:"geo",q:{ar:"ما أكبر محيط في العالم؟",fr:"Quel est le plus grand océan ?",en:"What is the largest ocean?"},
-  a:{ar:["الأطلسي","الهندي","الهادئ","المتجمد الشمالي"],fr:["Atlantique","Indien","Pacifique","Arctique"],en:["Atlantic","Indian","Pacific","Arctic"]},k:2},
- {c:"geo",q:{ar:"في أي قارة تقع مصر؟",fr:"Sur quel continent se trouve l'Égypte ?",en:"Which continent is Egypt in?"},
-  a:{ar:["آسيا","إفريقيا","أوروبا","أمريكا"],fr:["Asie","Afrique","Europe","Amérique"],en:["Asia","Africa","Europe","America"]},k:1},
- {c:"geo",q:{ar:"ما عاصمة اليابان؟",fr:"Quelle est la capitale du Japon ?",en:"What is the capital of Japan?"},
-  a:{ar:["بكين","سيول","طوكيو","بانكوك"],fr:["Pékin","Séoul","Tokyo","Bangkok"],en:["Beijing","Seoul","Tokyo","Bangkok"]},k:2},
- {c:"science",q:{ar:"ما الكوكب المعروف بالكوكب الأحمر؟",fr:"Quelle planète est appelée la planète rouge ?",en:"Which planet is called the Red Planet?"},
-  a:{ar:["الزهرة","المريخ","المشتري","زحل"],fr:["Vénus","Mars","Jupiter","Saturne"],en:["Venus","Mars","Jupiter","Saturn"]},k:1},
- {c:"science",q:{ar:"ما الغاز الذي تمتصه النباتات؟",fr:"Quel gaz les plantes absorbent-elles ?",en:"Which gas do plants absorb?"},
-  a:{ar:["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الهيدروجين"],fr:["Oxygène","Azote","Dioxyde de carbone","Hydrogène"],en:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"]},k:2},
- {c:"science",q:{ar:"كم عدد أرجل العنكبوت؟",fr:"Combien de pattes a une araignée ?",en:"How many legs does a spider have?"},
-  a:{ar:["ست","ثماني","عشر","أربع"],fr:["Six","Huit","Dix","Quatre"],en:["Six","Eight","Ten","Four"]},k:1},
- {c:"science",q:{ar:"ما العضو الذي يضخ الدم؟",fr:"Quel organe pompe le sang ?",en:"Which organ pumps blood?"},
-  a:{ar:["الرئة","الكبد","القلب","المعدة"],fr:["Poumon","Foie","Cœur","Estomac"],en:["Lung","Liver","Heart","Stomach"]},k:2},
- {c:"history",q:{ar:"أين تقع أهرامات الجيزة؟",fr:"Où se trouvent les pyramides de Gizeh ?",en:"Where are the Giza pyramids?"},
-  a:{ar:["مصر","العراق","اليونان","المغرب"],fr:["Égypte","Irak","Grèce","Maroc"],en:["Egypt","Iraq","Greece","Morocco"]},k:0},
- {c:"history",q:{ar:"من أول إنسان مشى على القمر؟",fr:"Qui fut le premier homme à marcher sur la Lune ?",en:"Who was the first person to walk on the Moon?"},
-  a:{ar:["يوري غاغارين","نيل أرمسترونغ","بز ألدرين","جون غلين"],fr:["Youri Gagarine","Neil Armstrong","Buzz Aldrin","John Glenn"],en:["Yuri Gagarin","Neil Armstrong","Buzz Aldrin","John Glenn"]},k:1},
- {c:"history",q:{ar:"في أي بلد نشأت الألعاب الأولمبية القديمة؟",fr:"Dans quel pays les Jeux olympiques antiques sont-ils nés ?",en:"Where did the ancient Olympic Games originate?"},
-  a:{ar:["إيطاليا","اليونان","مصر","الصين"],fr:["Italie","Grèce","Égypte","Chine"],en:["Italy","Greece","Egypt","China"]},k:1},
- {c:"sport",q:{ar:"كم لاعبًا من فريق واحد يبدأ مباراة كرة القدم؟",fr:"Combien de joueurs une équipe de football aligne-t-elle au départ ?",en:"How many players start a football match for one team?"},
-  a:{ar:["9","10","11","12"],fr:["9","10","11","12"],en:["9","10","11","12"]},k:2},
- {c:"sport",q:{ar:"في أي رياضة يُستخدم المضرب والريشة؟",fr:"Dans quel sport utilise-t-on une raquette et un volant ?",en:"Which sport uses a racket and a shuttlecock?"},
-  a:{ar:["التنس","الريشة الطائرة","الاسكواش","كرة الطاولة"],fr:["Tennis","Badminton","Squash","Tennis de table"],en:["Tennis","Badminton","Squash","Table tennis"]},k:1},
- {c:"sport",q:{ar:"كم حلقة في الشعار الأولمبي؟",fr:"Combien d'anneaux compte le symbole olympique ?",en:"How many rings are on the Olympic symbol?"},
-  a:{ar:["أربع","خمس","ست","سبع"],fr:["Quatre","Cinq","Six","Sept"],en:["Four","Five","Six","Seven"]},k:1},
- {c:"culture",q:{ar:"كم يومًا في السنة الكبيسة؟",fr:"Combien de jours compte une année bissextile ?",en:"How many days are in a leap year?"},
-  a:{ar:["365","366","364","360"],fr:["365","366","364","360"],en:["365","366","364","360"]},k:1},
- {c:"culture",q:{ar:"ما اللغة الرسمية في البرازيل؟",fr:"Quelle est la langue officielle du Brésil ?",en:"What is the official language of Brazil?"},
-  a:{ar:["الإسبانية","البرتغالية","الفرنسية","الإنجليزية"],fr:["Espagnol","Portugais","Français","Anglais"],en:["Spanish","Portuguese","French","English"]},k:1},
- {c:"tech",q:{ar:"ماذا تعني CPU في الحاسوب؟",fr:"Que signifie CPU en informatique ?",en:"What does CPU stand for?"},
-  a:{ar:["وحدة المعالجة المركزية","ذاكرة الوصول","بطاقة الصوت","القرص الصلب"],fr:["Unité centrale de traitement","Mémoire vive","Carte son","Disque dur"],en:["Central Processing Unit","Random Access Memory","Sound Card","Hard Drive"]},k:0},
- {c:"tech",q:{ar:"أي من هذه متصفح إنترنت؟",fr:"Lequel de ces éléments est un navigateur web ?",en:"Which of these is a web browser?"},
-  a:{ar:["Chrome","Excel","Windows","Bluetooth"],fr:["Chrome","Excel","Windows","Bluetooth"],en:["Chrome","Excel","Windows","Bluetooth"]},k:0},
- {c:"religion",q:{ar:"كم عدد أركان الإسلام؟",fr:"Combien y a-t-il de piliers de l'islam ?",en:"How many pillars of Islam are there?"},
-  a:{ar:["ثلاثة","أربعة","خمسة","ستة"],fr:["Trois","Quatre","Cinq","Six"],en:["Three","Four","Five","Six"]},k:2},
- {c:"religion",q:{ar:"ما الشهر الذي يصوم فيه المسلمون؟",fr:"Quel mois les musulmans jeûnent-ils ?",en:"During which month do Muslims fast?"},
-  a:{ar:["شوال","رمضان","محرم","رجب"],fr:["Chawwal","Ramadan","Mouharram","Rajab"],en:["Shawwal","Ramadan","Muharram","Rajab"]},k:1},
- {c:"cinema",q:{ar:"ما اسم المدرسة التي يدرس فيها هاري بوتر؟",fr:"Comment s'appelle l'école de Harry Potter ?",en:"What is the name of Harry Potter's school?"},
-  a:{ar:["هوجورتس","نارنيا","كاميلوت","متروبوليس"],fr:["Poudlard","Narnia","Camelot","Métropolis"],en:["Hogwarts","Narnia","Camelot","Metropolis"]},k:0},
- {c:"cinema",q:{ar:"أي شخصية كرتونية تعيش في أناناسة تحت البحر؟",fr:"Quel personnage vit dans un ananas sous la mer ?",en:"Which cartoon character lives in a pineapple under the sea?"},
-  a:{ar:["توم","سبونج بوب","ميكي ماوس","شريك"],fr:["Tom","Bob l'éponge","Mickey Mouse","Shrek"],en:["Tom","SpongeBob","Mickey Mouse","Shrek"]},k:1}
-];
+let currentCategory = "general";
+let currentQuestions = [];
+let currentIndex = 0;
+let roundCorrect = 0;
+let roundEarned = 0;
+let questionLocked = false;
+let timerInterval = null;
+let seconds = 30;
+let hintSpent = false;
+let imageCache = new Map();
 
-let language = "ar";
-let selectedCategory = "all";
-let gameQuestions = [];
-let current = 0;
-let score = 0;
-let correctCount = 0;
-let answered = false;
-let hintUsed = false;
-let timerId = null;
-let timeLeft = 20;
-let typingMode = false;
-let voiceMode = false;
-let recognition = null;
+const difficultyRewards = [10, 15, 20, 25, 30];
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+function t(key) {
+  return translations[lang][key] || translations.ar[key] || key;
 }
 
-function showPage(page) {
-  ["home","game","result"].forEach(id =>
-    $(id).classList.toggle("hidden", id !== page)
-  );
+function persist() {
+  localStorage.setItem("qk_points", points);
+  localStorage.setItem("qk_correct", totalCorrect);
+  localStorage.setItem("qk_answered", totalAnswered);
+  localStorage.setItem("qk_language", lang);
+  updateStats();
 }
 
-function updateLanguage() {
-  language = $("language").value;
-  document.documentElement.lang = language;
-  document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-  const t = TXT[language];
-
-  $("welcome").textContent = t.welcome;
-  $("intro").textContent = t.intro;
-  $("chooseCategory").textContent = t.choose;
-  $("startButton").textContent = t.start;
-  $("scoreLabel").textContent = t.score;
-  $("timeLabel").textContent = t.time;
-  $("questionLabel").textContent = t.question;
-  $("hintButton").textContent = t.hint;
-  $("typeButton").textContent = t.type;
-  $("voiceButton").textContent = t.voice;
-  $("backButton").textContent = t.back;
-  $("sendButton").textContent = t.send;
-  $("typedAnswer").placeholder = t.enter;
-  $("resultTitle").textContent = t.result;
-  $("againButton").textContent = t.again;
-  $("homeButton").textContent = t.home;
-
-  renderCategories();
-
-  if (!$("game").classList.contains("hidden") &&
-      current < gameQuestions.length) {
-    renderQuestion();
-  }
-}
-
-function renderCategories() {
-  const box = $("categories");
-  box.replaceChildren();
-
-  CATS.forEach(([key,icon]) => {
-    const button = document.createElement("button");
-    button.className = "category" +
-      (selectedCategory === key ? " active" : "");
-    button.innerHTML = `<span class="cat-icon">${icon}</span>`;
-    const label = document.createElement("span");
-    label.textContent = TXT[language][key];
-    button.appendChild(label);
-
-    button.onclick = () => {
-      selectedCategory = key;
-      renderCategories();
-    };
-    box.appendChild(button);
-  });
-}
-
-function startGame() {
-  clearInterval(timerId);
-  score = 0;
-  current = 0;
-  correctCount = 0;
-  answered = false;
-  hintUsed = false;
-  typingMode = false;
-  voiceMode = false;
-
-  let pool = selectedCategory === "all"
-    ? QUESTIONS
-    : QUESTIONS.filter(q => q.c === selectedCategory);
-
-  gameQuestions = shuffle(pool).slice(0, Math.min(10,pool.length));
-
-  if (!gameQuestions.length) {
-    alert("No questions available.");
-    return;
-  }
-
-  showPage("game");
-  $("score").textContent = score;
-  $("message").textContent = "";
-  $("typingArea").classList.add("hidden");
-  renderQuestion();
-}
-
-function renderQuestion() {
-  clearInterval(timerId);
-
-  if (current >= gameQuestions.length) {
-    finishGame();
-    return;
-  }
-
-  answered = false;
-  hintUsed = false;
-  timeLeft = 20;
-  typingMode = false;
-  $("typingArea").classList.add("hidden");
-  $("typedAnswer").value = "";
-  $("message").textContent = "";
-  $("timer").textContent = timeLeft;
-  $("counter").textContent =
-    `${current + 1}/${gameQuestions.length}`;
-  $("progressBar").style.width =
-    `${current / gameQuestions.length * 100}%`;
-  $("questionNumber").textContent =
-    `${TXT[language].q} ${current + 1} ${TXT[language].of} ${gameQuestions.length}`;
-
-  const q = gameQuestions[current];
-  et une raquette ?",
-en:"Which sport uses a yellow ball and racket?"
-},
-a:["التنس","الملاكمة","السباحة","الجودو"],
-correct:0
-},
-
-{
-cat:"sports",
-q:{
-ar:"كم شوطًا في مباراة كرة القدم؟",
-fr:"Combien de mi-temps au football ?",
-en:"How many halves are in football?"
-},
-a:["1","2","3","4"],
-correct:1
-},
-
-{
-cat:"sports",
-q:{
-ar:"كم عدد الحلقات في شعار الألعاب الأولمبية؟",
-fr:"Combien d'anneaux sur le symbole olympique ?",
-en:"How many rings are on the Olympic symbol?"
-},
-a:["4","5","6","7"],
-correct:1
-},
-
-
-{
-cat:"movies",
-q:{
-ar:"أي شخصية تعيش في مدينة Gotham؟",
-fr:"Quel personnage vit à Gotham City ?",
-en:"Which character lives in Gotham City?"
-},
-a:["Batman","Superman","Spider-Man","Hulk"],
-correct:0
-},
-
-{
-cat:"movies",
-q:{
-ar:"ما اسم الفيلم الشهير عن سفينة Titanic؟",
-fr:"Comment s'appelle le célèbre film sur le Titanic ?",
-en:"What is the famous movie about the Titanic called?"
-},
-a:["Titanic","Avatar","Gladiator","Joker"],
-correct:0
-},
-
-{
-cat:"movies",
-q:{
-ar:"أي بطل يستخدم درعًا دائريًا؟",
-fr:"Quel héros utilise un bouclier rond ?",
-en:"Which hero uses a round shield?"
-},
-a:["Captain America","Iron Man","Thor","Batman"],
-correct:0
-},
-
-{
-cat:"movies",
-q:{
-ar:"أي فيلم تدور أحداثه على كوكب Pandora؟",
-fr:"Quel film se déroule sur Pandora ?",
-en:"Which movie is set on Pandora?"
-},
-a:["Avatar","Titanic","Joker","Rocky"],
-correct:0
-},
-
-
-{
-cat:"series",
-q:{
-ar:"في أي مسلسل تظهر شخصية Walter White؟",
-fr:"Dans quelle série apparaît Walter White ?",
-en:"Which series features Walter White?"
-},
-a:["Breaking Bad","Friends","Dark","Lupin"],
-correct:0
-},
-
-{
-cat:"series",
-q:{
-ar:"في أي مسلسل توجد لعبة البقاء الشهيرة؟",
-fr:"Quelle série présente le célèbre jeu de survie ?",
-en:"Which series features the famous survival game?"
-},
-a:["Squid Game","Sherlock","The Office","Lost"],
-correct:0
-},
-
-{
-cat:"series",
-q:{
-ar:"أي مسلسل تدور أحداثه في Hawkins؟",
-fr:"Quelle série se déroule à Hawkins ?",
-en:"Which series is set in Hawkins?"
-},
-a:["Stranger Things","Dark","Lupin","Friends"],
-correct:0
-},
-
-{
-cat:"series",
-q:{
-ar:"أي مسلسل عن مجموعة أصدقاء في نيويورك؟",
-fr:"Quelle série parle d'un groupe d'amis à New York ?",
-en:"Which series is about a group of friends in New York?"
-},
-a:["Friends","Dark","Lupin","Lost"],
-correct:0
-},
-
-
-{
-cat:"music",
-q:{
-ar:"من يغني أغنية Billie Jean؟",
-fr:"Qui chante Billie Jean ?",
-en:"Who sang Billie Jean?"
-},
-a:["Michael Jackson","Elvis Presley","Adele","Drake"],
-correct:0
-},
-
-{
-cat:"music",
-q:{
-ar:"كم وترًا في الغيتار الشائع؟",
-fr:"Combien de cordes possède une guitare classique ?",
-en:"How many strings does a common guitar have?"
-},
-a:["4","5","6","7"],
-correct:2
-},
-
-{
-cat:"music",
-q:{
-ar:"ما الآلة التي تحتوي عادةً على 88 مفتاحًا؟",
-fr:"Quel instrument possède généralement 88 touches ?",
-en:"Which instrument usually has 88 keys?"
-},
-a:["البيانو","الغيتار","العود","الطبلة"],
-correct:0
-},
-
-
-{
-cat:"religion",
-q:{
-ar:"كم عدد أركان الإسلام؟",
-fr:"Combien de piliers de l'islam ?",
-en:"How many pillars of Islam are there?"
-},
-a:["3","4","5","6"],
-correct:2
-},
-
-{
-cat:"religion",
-q:{
-ar:"ما اسم الشهر الذي يصوم فيه المسلمون؟",
-fr:"Quel mois les musulmans jeûnent-ils ?",
-en:"Which month do Muslims fast in?"
-},
-a:["رمضان","شوال","محرم","رجب"],
-correct:0
-},
-
-{
-cat:"religion",
-q:{
-ar:"إلى أي مدينة يتجه المسلمون في الصلاة؟",
-fr:"Vers quelle ville les musulmans se tournent-ils dans la prière ?",
-en:"Which city do Muslims face in prayer?"
-},
-a:["مكة","المدينة","القدس","الدوحة"],
-correct:0
-},
-
-{
-cat:"religion",
-q:{
-ar:"كم عدد الصلوات المفروضة يوميًا؟",
-fr:"Combien de prières obligatoires par jour ?",
-en:"How many obligatory prayers are there each day?"
-},
-a:["3","4","5","6"],
-correct:2
-},
-
-
-{
-cat:"culture",
-q:{
-ar:"كم عدد أيام الأسبوع؟",
-fr:"Combien de jours dans une semaine ?",
-en:"How many days are in a week?"
-},
-a:["5","6","7","8"],
-correct:2
-},
-
-{
-cat:"culture",
-q:{
-ar:"كم عدد أشهر السنة؟",
-fr:"Combien de mois dans une année ?",
-en:"How many months are in a year?"
-},
-a:["10","11","12","13"],
-correct:2
-},
-
-{
-cat:"culture",
-q:{
-ar:"ما اللون الناتج عن خلط الأزرق والأصفر؟",
-fr:"Quelle couleur donne le mélange du bleu et du jaune ?",
-en:"What color do blue and yellow make?"
-},
-a:["الأخضر","البنفسجي","البرتقالي","الأسود"],
-correct:0
-},
-
-
-{
-cat:"technology",
-q:{
-ar:"ماذا يعني CPU؟",
-fr:"Que signifie CPU ?",
-en:"What does CPU stand for?"
-},
-a:[
-"وحدة المعالجة المركزية",
-"ذاكرة",
-"بطاقة رسومات",
-"نظام تشغيل"
-],
-correct:0
-},
-
-{
-cat:"technology",
-q:{
-ar:"أي شركة طورت Android؟",
-fr:"Quelle entreprise a développé Android ?",
-en:"Which company developed Android?"
-},
-a:["Google","Microsoft","Nintendo","Nokia"],
-correct:0
-},
-
-{
-cat:"technology",
-q:{
-ar:"ما الجهاز المستخدم غالبًا لالتقاط الصور؟",
-fr:"Quel appareil sert généralement à prendre des photos ?",
-en:"Which device is commonly used to take photos?"
-},
-a:["الكاميرا","الطابعة","الراوتر","لوحة المفاتيح"],
-correct:0
-},
-
-{
-cat:"technology",
-q:{
-ar:"ما معنى Wi-Fi؟",
-fr:"Que permet le Wi-Fi ?",
-en:"What does Wi-Fi allow?"
-},
-a:[
-"اتصال لاسلكي بالشبكة",
-"طباعة فقط",
-"تصوير فقط",
-"تشغيل السيارات"
-],
-correct:0
-},
-
-
-/* IMAGE QUESTIONS */
-
-{
-cat:"image",
-visual:"🦁",
-q:{
-ar:"ما الحيوان الظاهر في الصورة؟",
-fr:"Quel animal voyez-vous ?",
-en:"What animal is shown?"
-},
-a:["أسد","نمر","حصان","فيل"],
-correct:0
-},
-
-{
-cat:"image",
-visual:"🚀",
-q:{
-ar:"ما الشيء الظاهر في الصورة؟",
-fr:"Qu'est-ce qui est montré ?",
-en:"What is shown?"
-},
-a:["صاروخ","طائرة","سفينة","سيارة"],
-correct:0
-},
-
-{
-cat:"image",
-visual:"⚽",
-q:{
-ar:"ما الرياضة المرتبطة بهذه الكرة؟",
-fr:"Quel sport utilise ce ballon ?",
-en:"Which sport uses this ball?"
-},
-a:["كرة القدم","التنس","الغولف","السباحة"],
-correct:0
-},
-
-{
-cat:"image",
-visual:"🎸",
-q:{
-ar:"ما الآلة الموسيقية الظاهرة؟",
-fr:"Quel instrument voyez-vous ?",
-en:"What musical instrument is shown?"
-},
-a:["غيتار","بيانو","كمان","ناي"],
-correct:0
-},
-
-{
-cat:"image",
-visual:"🌍",
-q:{
-ar:"ما الرمز الظاهر؟",
-fr:"Quel symbole voyez-vous ?",
-en:"What symbol is shown?"
-},
-a:["الأرض","القمر","الشمس","المريخ"],
-correct:0
-},
-
-{
-cat:"image",
-visual:"🍎",
-q:{
-ar:"ما الفاكهة الظاهرة؟",
-fr:"Quel fruit voyez-vous ?",
-en:"What fruit is shown?"
-},
-a:["تفاحة","برتقالة","موزة","عنب"],
-correct:0
-}
-
-];
-
-
-/* =========================
-   VARIABLES
-========================= */
-
-let language="ar";
-let selectedCategory="all";
-
-let gameQuestions=[];
-let current=0;
-let score=0;
-let timer=20;
-let timerId=null;
-
-let hintUsed=false;
-
-
-/* =========================
-   CATEGORY DISPLAY
-========================= */
-
-function renderCategories(){
-
-const box=document.getElementById("categories");
-
-box.innerHTML="";
-
-categoryKeys.forEach((key,index)=>{
-
-const button=document.createElement("button");
-
-button.className="category";
-
-if(selectedCategory===key){
-button.classList.add("selected");
-}
-
-button.textContent=translations[language].categories[index];
-
-button.onclick=()=>{
-
-selectedCategory=key;
-
-renderCategories();
-
-};
-
-box.appendChild(button);
-
-});
-
-}
-
-
-/* =========================
-   LANGUAGE
-========================= */
-
-function updateLanguage(){
-
-const t=translations[language];
-
-document.documentElement.lang=language;
-
-document.documentElement.dir=
-language==="ar"?"rtl":"ltr";
-
-document.getElementById("subtitle").textContent=t.subtitle;
-
-document.getElementById("chooseCategory").textContent=t.choose;
-
-document.getElementById("startButton").textContent=t.start;
-
-document.getElementById("hintButton").textContent=t.hint;
-
-document.getElementById("voiceButton").textContent=t.voice;
-
-document.getElementById("sendButton").textContent=t.send;
-
-document.getElementById("typedAnswer").placeholder=t.placeholder;
-
-document.getElementById("finished").textContent=t.finished;
-
-document.getElementById("againButton").textContent=t.again;
-
-renderCategories();
-
-}
-
-
-/* =========================
-   CHANGE LANGUAGE
-========================= */
-
-function changeLanguage(){
-
-if(language==="ar"){
-language="fr";
-}
-else if(language==="fr"){
-language="en";
-}
-else{
-language="ar";
-}
-
-updateLanguage();
-
-}
-
-
-/* =========================
-   START GAME
-========================= */
-
-function startGame(){
-
-if(selectedCategory==="all"){
-
-gameQuestions=[...questions];
-
-}
-else{
-
-gameQuestions=
-questions.filter(q=>q.cat===selectedCategory);
-
-}
-
-gameQuestions.sort(()=>Math.random()-0.5);
-
-current=0;
-score=0;
-
-document.getElementById("home")
-.classList.add("hidden");
-
-document.getElementById("result")
-.classList.add("hidden");
-
-document.getElementById("game")
-.classList.remove("hidden");
-
-showQuestion();
-
-}
-
-
-/* =========================
-   SHOW QUESTION
-========================= */
-
-function showQuestion(){
-
-clearInterval(timerId);
-
-if(current>=gameQuestions.length){
-
-finishGame();
-
-return;
-
-}
-
-hintUsed=false;
-
-timer=20;
-
-document.getElementById("score").textContent=score;
-
-document.getElementById("timer").textContent=timer;
-
-document.getElementById("questionNumber").textContent=
-(current+1)+" / "+gameQuestions.length;
-
-document.getElementById("progressBar").style.width=
-((current/gameQuestions.length)*100)+"%";
-
-document.getElementById("message").textContent="";
-
-const q=gameQuestions[current];
-
-document.getElementById("question").textContent=
-q.q[language];
-
-
-/* IMAGE */
-
-const visual=document.getElementById("visual");
-
-if(q.cat==="image"){
-
-visual.textContent=q.visual;
-
-visual.classList.remove("hidden");
-
-}
-else{
-
-visual.classList.add("hidden");
-
-}
-
-
-/* ANSWERS */
-
-const answers=document.getElementById("answers");
-
-answers.innerHTML="";
-
-q.a.forEach((answer,index)=>{
-
-const button=document.createElement("button");
-
-button.textContent=answer;
-
-button.onclick=()=>answerQuestion(index);
-
-answers.appendChild(button);
-
-});
-
-
-/* TYPING */
-
-document.getElementById("typingArea")
-.classList.add("hidden");
-
-document.getElementById("typedAnswer").value="";
-
-
-/* TIMER */
-
-timerId=setInterval(()=>{
-
-timer--;
-
-document.getElementById("timer").textContent=timer;
-
-if(timer<=0){
-
-clearInterval(timerId);
-
-document.getElementById("message").textContent=
-translations[language].time;
-
-setTimeout(()=>{
-
-current++;
-
-showQuestion();
-
-},700);
-
-}
-
-},1000);
-
-}
-
-
-/* ========
-*/
-
-let answered = false;
-let correctCount = 0;
-
-/* ANSWER QUESTION */
-
-function answerQuestion(index) {
-    if (answered) return;
-
-    answered = true;
-    clearInterval(timerId);
-
-    const q = gameQuestions[current];
-    const buttons = document.getElementById("answers").children;
-    const t = translations[language];
-
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].disabled = true;
-
-        if (i === q.correct) {
-            buttons[i].classList.add("correct");
-        }
-    }
-
-    if (index === q.correct) {
-        score += 10;
-        correctCount++;
-        document.getElementById("message").textContent = t.correct;
-    } else {
-        buttons[index].classList.add("wrong");
-        document.getElementById("message").textContent = t.wrong;
-    }
-
-    document.getElementById("score").textContent = score;
-
-    setTimeout(() => {
-        current++;
-        showQuestion();
-    }, 1100);
-}
-
-/* HINT */
-
-function useHint() {
-    if (answered) return;
-
-    const t = translations[language];
-
-    if (hintUsed) {
-        document.getElementById("message").textContent =
-            language === "ar" ? "استخدمت التلميح بالفعل!" :
-            language === "fr" ? "Indice déjà utilisé !" :
-            "Hint already used!";
-        return;
-    }
-
-    if (score < 15) {
-        document.getElementById("message").textContent = t.need;
-        return;
-    }
-
-    score -= 15;
-    hintUsed = true;
-
-    const q = gameQuestions[current];
-    const buttons = document.getElementById("answers").children;
-
-    let removed = 0;
-
-    for (let i = 0; i < buttons.length; i++) {
-        if (i !== q.correct && removed < 2) {
-            buttons[i].disabled = true;
-            buttons[i].style.visibility = "hidden";
-            removed++;
-        }
-    }
-
-    document.getElementById("score").textContent = score;
-    document.getElementById("message").textContent = t.used;
-}
-
-/* TYPED ANSWER */
-
-function submitTypedAnswer() {
-    if (answered) return;
-
-    const input = document.getElementById("typedAnswer");
-    const value = input.value.trim().toLowerCase();
-
-    if (!value) {
-        document.getElementById("message").textContent =
-            language === "ar" ? "اكتب إجابتك أولًا." :
-            language === "fr" ? "Écrivez d'abord votre réponse." :
-            "Type your answer first.";
-        return;
-    }
-
-    const q = gameQuestions[current];
-    const correctAnswer = q.a[q.correct].trim().toLowerCase();
-
-    if (value === correctAnswer) {
-        answerQuestion(q.correct);
-    } else {
-        let found = -1;
-
-        for (let i = 0; i < q.a.length; i++) {
-            if (value === q.a[i].trim().toLowerCase()) {
-                found = i;
-                break;
-            }
-        }
-
-        answerQuestion(found === -1 ? -1 : found);
-    }
-}
-
-/* VOICE ANSWER */
-
-function voiceAnswer() {
-    const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-        document.getElementById("message").textContent =
-            language === "ar"
-                ? "المتصفح لا يدعم الإجابة الصوتية. جرّب Chrome."
-                : language === "fr"
-                ? "La reconnaissance vocale n'est pas prise en charge."
-                : "Voice recognition is not supported in this browser.";
-        return;
-    }
-
-    if (answered) return;
-
-    const recognition = new SpeechRecognition();
-
-    recognition.lang =
-        language === "ar" ? "ar-DZ" :
-        language === "fr" ? "fr-FR" : "en-US";
-
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    document.getElementById("message").textContent =
-        language === "ar" ? "🎤 استمع إليك الآن..." :
-        language === "fr" ? "🎤 Je vous écoute..." :
-        "🎤 Listening...";
-
-    recognition.onresult = function(event) {
-        const spoken = event.results[0][0].transcript
-            .trim()
-            .toLowerCase();
-
-        const q = gameQuestions[current];
-
-        let found = -1;
-
-        for (let i = 0; i < q.a.length; i++) {
-            if (spoken === q.a[i].trim().toLowerCase()) {
-                found = i;
-                break;
-            }
-        }
-
-        if (found !== -1) {
-            answerQuestion(found);
-        } else {
-            document.getElementById("message").textContent =
-                language === "ar"
-                    ? "لم أتعرف على الإجابة. حاول اختيارها من القائمة."
-                    : language === "fr"
-                    ? "Réponse non reconnue. Choisissez dans la liste."
-                    : "Answer not recognized. Choose from the list.";
-        }
-    };
-
-    recognition.onerror = function() {
-        document.getElementById("message").textContent =
-            language === "ar"
-                ? "تعذر التعرف على الصوت. تحقق من إذن الميكروفون."
-                : language === "fr"
-                ? "Erreur du microphone. Vérifiez les autorisations."
-                : "Voice error. Check microphone permissions.";
-    };
-
-    recognition.start();
-}
-
-/* FINISH GAME */
-
-function finishGame() {
-    clearInterval(timerId);
-
-    document.getElementById("game").classList.add("hidden");
-    document.getElementById("result").classList.remove("hidden");
-
-    document.getElementById("finalScore").textContent = score;
-
-    const percentage = gameQuestions.length
-        ? Math.round((correctCount / gameQuestions.length) * 100)
-        : 0;
-
-    document.getElementById("resultText").textContent =
-        translations[language].result
-            .replace("{p}", percentage)
-            .replace("{s}", score);
-}
-
-/* RESTART */
-
-function restart() {
-    clearInterval(timerId);
-
-    document.getElementById("result").classList.add("hidden");
-    document.getElementById("game").classList.add("hidden");
-    document.getElementById("home").classList.remove("hidden");
-
-    selectedCategory = "all";
-    renderCategories();
-}
-
-/* INITIALIZE APP */
-
-updateLanguage();</script>
-</body>
-</html>
-/* ========
-*/
-
-let answered = false;
-let correctCount = 0;
-
-function answerQuestion(index) {
-if (answered) return;
-
-answered = true;
-clearInterval(timerId);
-
-const q = gameQuestions[current];
-const buttons = document.getElementById("answers").children;
-const t = translations[language];
-
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].disabled = true;
-
-    if (i === q.correct) {
-        buttons[i].classList.add("correct");
-    }
-}
-
-if (index === q.correct) {
-    score += 10;
-    correctCount++;
-    document.getElementById("message").textContent = t.correct;
-} else {
-    if (index >= 0 && index < buttons.length) {
-        buttons[index].classList.add("wrong");
-    }
-    document.getElementById("message").textContent = t.wrong;
-}
-
-document.getElementById("score").textContent = score;
-
-setTimeout(() => {
-    current++;
-    answered = false;
-    showQuestion();
-}, 1100);
-
-}
-
-function useHint() {
-if (answered) return;
-
-const t = translations[language];
-
-if (hintUsed) {
-    document.getElementById("message").textContent =
-        language === "ar" ? "استخدمت التلميح بالفعل!" :
-        language === "fr" ? "Indice déjà utilisé !" :
-        "Hint already used!";
-    return;
-}
-
-if (score < 15) {
-    document.getElementById("message").textContent = t.need;
-    return;
-}
-
-score -= 15;
-hintUsed = true;
-
-const q = gameQuestions[current];
-const buttons = document.getElementById("answers").children;
-let removed = 0;
-
-for (let i = 0; i < buttons.length; i++) {
-    if (i !== q.correct && removed < 2) {
-        buttons[i].disabled = true;
-        buttons[i].style.visibility = "hidden";
-        removed++;
-    }
-}
-
-document.getElementById("score").textContent = score;
-document.getElementById("message").textContent = t.used;
-
-}
-
-function submitTypedAnswer() {
-if (answered) return;
-
-const input = document.getElementById("typedAnswer");
-const value = input.value.trim().toLowerCase();
-
-if (!value) {
-    document.getElementById("message").textContent =
-        language === "ar" ? "اكتب إجابتك أولًا." :
-        language === "fr" ? "Écrivez votre réponse." :
-        "Type your answer first.";
-    return;
-}
-
-const q = gameQuestions[current];
-const correctAnswer = q.a[q.correct].trim().toLowerCase();
-
-if (value === correctAnswer) {
-    answerQuestion(q.correct);
-} else {
-    answerQuestion(-1);
-}
-
-}
-
-function voiceAnswer() {
-const SpeechRecognition =
-window.SpeechRecognition || window.webkitSpeechRecognition;
-
-if (!SpeechRecognition) {
-    document.getElementById("message").textContent =
-        "التعرف الصوتي غير مدعوم في هذا المتصفح.";
-    return;
-}
-
-if (answered) return;
-
-const recognition = new SpeechRecognition();
-
-recognition.lang =
-    language === "ar" ? "ar-DZ" :
-    language === "fr" ? "fr-FR" : "en-US";
-
-recognition.onresult = function(event) {
-    const spoken = event.results[0][0].transcript.trim().toLowerCase();
-    const q = gameQuestions[current];
-
-    let found = -1;
-
-    for (let i = 0; i < q.a.length; i++) {
-        if (spoken === q.a[i].trim().toLowerCase()) {
-            found = i;
-            break;
-        }
-    }
-
-    if (found !== -1) {
-        answerQuestion(found);
-    } else {
-        document.getElementById("message").textContent =
-            "لم أتعرف على الإجابة، حاول مرة أخرى.";
-    }
-};
-
-recognition.start();
-
-}
-
-function finishGame() {
-clearInterval(timerId);
-
-document.getElementById("game").classList.add("hidden");
-document.getElementById("result").classList.remove("hidden");
-
-document.getElementById("finalScore").textContent = score;
-
-const percentage = gameQuestions.length
-    ? Math.round(correctCount / gameQuestions.length * 100)
-    : 0;
-
-document.getElementById("resultText").textContent =
-    translations[language].result
-        .replace("{p}", percentage)
-        .replace("{s}", score);
-
-}
-
-function restart() {
-clearInterval(timerId);
-
-current = 0;
-score = 0;
-correctCount = 0;
-answered = false;
-
-document.getElementById("result").classList.add("hidden");
-document.getElementById("game").classList.add("hidden");
-document.getElementById("home").classList.remove("hidden");
-
-selectedCategory = "all";
-renderCategories();
-
-}
-
-updateLanguage();
-</script>
-
-</body>
-    </html>
+function updateStats() {
+  document.getElementById("points").textContent = points;
+  document.getElementById("level").textContent =
+    Math.floor(totalCorrect / 5) + 1;
+
+  document.getElementById("stats").textContent =
+    t("correctCount") + ": " + totalCorrect +
+    " | " + t("answered") + ": "
