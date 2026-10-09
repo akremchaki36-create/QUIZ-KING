@@ -2,533 +2,300 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101326">
-<title>QUIZ KING 👑</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10172a">
+<title>QUIZ KING</title>
 <style>
-:root {
-  --bg: #101326;
-  --card: #1b203b;
-  --gold: #ffd166;
-  --blue: #536dfe;
-  --green: #38d996;
-  --red: #ff637d;
-  --text: #f6f7ff;
-  --muted: #aeb5d0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-  min-height: 100vh;
-}
-
-button, select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  transition: .2s;
-}
-
-button:active {
-  transform: scale(.97);
-}
-
-header {
-  padding: 20px 15px;
-  text-align: center;
-  background: linear-gradient(135deg,#20264c,#101326);
-  border-bottom: 1px solid #343958;
-}
-
-.logo {
-  font-size: 30px;
-  font-weight: 900;
-  color: var(--gold);
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  color: var(--muted);
-  margin-top: 7px;
-  font-size: 13px;
-}
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  max-width: 850px;
-  margin: 15px auto;
-  padding: 0 12px;
-}
-
-.badge {
-  background: var(--card);
-  padding: 10px 13px;
-  border-radius: 12px;
-  font-size: 14px;
-}
-
-select {
-  background: var(--card);
-  color: white;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #444b70;
-}
-
-main {
-  max-width: 850px;
-  margin: auto;
-  padding: 10px 14px 40px;
-}
-
-.panel {
-  background: var(--card);
-  border: 1px solid #303758;
-  padding: 20px;
-  border-radius: 20px;
-  margin-bottom: 18px;
-}
-
-h2 {
-  margin-top: 0;
-  font-size: 21px;
-}
-
-p {
-  line-height: 1.7;
-}
-
-.muted {
-  color: var(--muted);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 12px;
-}
-
-.game-card {
-  background: #252b4c;
-  color: white;
-  border: 1px solid #3b436c;
-  border-radius: 16px;
-  padding: 18px 10px;
-  text-align: center;
-  min-height: 120px;
-}
-
-.game-card:hover {
-  background: #30385f;
-  border-color: var(--gold);
-}
-
-.game-icon {
-  font-size: 32px;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.game-card strong {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.game-card small {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.primary {
-  background: linear-gradient(135deg,#697cff,#4657df);
-  color: white;
-  padding: 13px 18px;
-  border-radius: 12px;
-  font-weight: bold;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.secondary {
-  background: #303754;
-  color: white;
-  padding: 12px;
-  border-radius: 12px;
-}
-
-.gold-btn {
-  background: var(--gold);
-  color: #18192c;
-  padding: 12px;
-  border-radius: 12px;
-  font-weight: bold;
-}
-
-.answers {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.answer {
-  background: #282f50;
-  color: white;
-  border: 1px solid #414a70;
-  border-radius: 12px;
-  padding: 15px 8px;
-  min-height: 55px;
-  overflow-wrap: anywhere;
-}
-
-.answer.correct {
-  background: #145e49;
-  border-color: var(--green);
-}
-
-.answer.wrong {
-  background: #6b293c;
-  border-color: var(--red);
-}
-
-.answer:disabled {
-  cursor: default;
-}
-
-.question-image {
-  width: 100%;
-  height: 260px;
-  object-fit: contain;
-  background: #12162b;
-  border-radius: 16px;
-  display: block;
-  margin: 15px auto;
-}
-
-.clue-grid {
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.clue {
-  background: #12162b;
-  border-radius: 12px;
-  padding: 10px;
-  text-align: center;
-}
-
-.clue img {
-  width: 100%;
-  height: 90px;
-  object-fit: contain;
-}
-
-.clue small {
-  display: block;
-  color: var(--muted);
-  margin-top: 5px;
-  font-size: 11px;
-}
-
-.progress {
-  height: 7px;
-  background: #343b5d;
-  border-radius: 20px;
-  overflow: hidden;
-  margin: 12px 0;
-}
-
-.progress-bar {
-  height: 100%;
-  width: 0;
-  background: var(--gold);
-  transition: width .3s;
-}
-
-.feedback {
-  padding: 12px;
-  border-radius: 12px;
-  margin-top: 12px;
-  display: none;
-}
-
-.feedback.show {
-  display: block;
-}
-
-.hint {
-  background: #3a3156;
-  color: #f5d8ff;
-}
-
-.success {
-  background: #145e49;
-}
-
-.error {
-  background: #6b293c;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.menu-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 15px;
-}
-
-.menu-row button {
-  flex: 1;
-  min-width: 100px;
-}
-
-footer {
-  text-align: center;
-  color: #747d9f;
-  padding: 20px;
-  font-size: 12px;
-}
-
-#timer {
-  color: var(--gold);
-  font-weight: bold;
-}
-
-.memory-grid {
-  display: grid;
-  grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 8px;
-  margin-top: 15px;
-}
-
-.memory-card {
-  height: 75px;
-  border-radius: 12px;
-  background: #343d68;
-  color: white;
-  font-size: 27px;
-}
-
-.memory-card.open {
-  background: #f2f3ff;
-  color: #161a30;
-}
-
-.memory-card.matched {
-  background: #145e49;
-}
-
-.ttt-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 8px;
-  max-width: 300px;
-  margin: 20px auto;
-}
-
-.ttt-cell {
-  height: 85px;
-  font-size: 32px;
-  font-weight: bold;
-  color: white;
-  background: #303858;
-  border-radius: 12px;
-}
-
-@media (max-width: 420px) {
-  .question-image {
-    height: 220px;
-  }
-
-  .panel {
-    padding: 14px;
-  }
-
-  .game-card {
-    padding: 14px 7px;
-  }
-
-  .answers {
-    gap: 8px;
-  }
-
-  .answer {
-    padding: 12px 6px;
-    font-size: 14px;
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#0b1020;color:#fff;min-height:100vh}
+header{text-align:center;padding:20px 10px}
+h1{color:#ffc857;margin:0;font-size:30px}
+header p{color:#bbc6df}
+main{max-width:750px;margin:auto;padding:12px}
+.panel{background:#151e34;border:1px solid #344466;border-radius:18px;padding:16px;margin-bottom:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+select,button{font:inherit;border:0;border-radius:11px;padding:12px;cursor:pointer}
+select{background:#263653;color:white}
+.stats{background:#263653;padding:10px;border-radius:10px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.game{background:#263653;color:white;text-align:start;border:1px solid #405477;min-height:85px}
+.game span{display:block;font-size:23px;margin-bottom:6px}
+.game small{display:block;color:#bbc6df;margin-top:5px}
+.hidden{display:none!important}
+button:active{transform:scale(.98)}
+.answers{display:grid;gap:9px;margin:15px 0}
+.answer{background:#263653;color:white;text-align:start;border:1px solid #405477}
+.answer.correct{background:#176548}
+.answer.wrong{background:#783344}
+.answer:disabled{opacity:.85}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row button{flex:1}
+.primary{background:#4c8dff;color:white}
+.gold{background:#ffc857;color:#151e34}
+.secondary{background:#344466;color:white}
+.question{font-size:20px;line-height:1.6;margin:18px 0}
+.question img{display:block;width:100%;max-height:240px;object-fit:contain;border-radius:12px;margin-bottom:12px}
+.feedback{color:#ffc857;min-height:26px;line-height:1.5}
+.progress{height:7px;background:#344466;border-radius:8px;overflow:hidden;margin:12px 0}
+.progress div{height:100%;width:0;background:#37d69a}
+#memoryGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.memory-card{background:#263653;color:white;font-size:25px;min-height:65px}
+#tttGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:350px;margin:15px auto}
+.cell{background:#263653;color:white;font-size:35px;min-height:75px}
+footer{text-align:center;color:#8998b8;padding:15px;font-size:12px}
+@media(max-width:380px){.grid{grid-template-columns:1fr}h1{font-size:25px}}
 </style>
 </head>
-
 <body>
-
 <header>
-  <div class="logo">👑 QUIZ KING</div>
-  <div class="subtitle" id="subtitle">
-    اختبر ذكاءك، اكتشف الصور، وكن ملك المعرفة!
-  </div>
+<h1>👑 QUIZ KING</h1>
+<p id="tagline">اختبر ذكاءك واجمع النقاط!</p>
 </header>
 
-<div class="topbar">
-  <div class="badge">⭐ <span id="points">0</span> نقطة</div>
-  <div class="badge">🏆 المستوى <span id="level">1</span></div>
-
-  <select id="language" onchange="changeLanguage()">
-    <option value="ar">العربية</option>
-    <option value="fr">Français</option>
-    <option value="en">English</option>
-  </select>
+<main>
+<div class="top">
+<select id="language" aria-label="Language">
+<option value="ar">العربية</option>
+<option value="fr">Français</option>
+<option value="en">English</option>
+</select>
+<div class="stats"><span id="pointsLabel">النقاط</span>: <b id="points">0</b></div>
 </div>
 
-<main>
+<section id="home" class="panel">
+<h2 id="welcome">اختر لعبة</h2>
+<p id="intro">الإجابة الصحيحة = 10 نقاط، والتلميح يكلف 3 نقاط.</p>
+<div class="grid">
+<button class="game" data-game="general"><span>🧠</span><b data-t="general">ثقافة عامة</b><small data-t="generalSub">أسئلة متنوعة</small></button>
+<button class="game" data-game="football"><span>⚽</span><b data-t="football">كرة القدم</b><small data-t="footballSub">لاعبون وأندية</small></button>
+<button class="game" data-game="movies"><span>🎬</span><b data-t="movies">الأفلام والممثلون</b><small data-t="moviesSub">أسئلة عن النجوم</small></button>
+<button class="game" data-game="flags"><span>🌍</span><b data-t="flags">أعلام الدول</b><small data-t="flagsSub">اكتشف الدولة</small></button>
+<button class="game" data-game="landmarks"><span>🏛️</span><b data-t="landmarks">معالم العالم</b><small data-t="landmarksSub">أماكن مشهورة</small></button>
+<button class="game" data-game="cars"><span>🚘</span><b data-t="cars">السيارات</b><small data-t="carsSub">ماركات ومعلومات</small></button>
+<button class="game" data-game="who"><span>🕵️</span><b data-t="who">من أنا؟</b><small data-t="whoSub">اكتشف الشخصية</small></button>
+<button class="game" data-game="memory"><span>🧩</span><b data-t="memory">لعبة الذاكرة</b><small data-t="memorySub">اعثر على الأزواج</small></button>
+<button class="game" data-game="ttt"><span>⭕</span><b data-t="ttt">إكس-أو</b><small data-t="tttSub">ضد الكمبيوتر</small></button>
+</div>
+</section>
 
-  <section id="home">
+<section id="quiz" class="panel hidden">
+<div class="top">
+<b id="category"></b>
+<span><span id="timeLabel">الوقت</span>: <b id="timer">20</b></span>
+<span id="counter"></span>
+</div>
+<div class="progress"><div id="bar"></div></div>
+<div id="question" class="question"></div>
+<div id="answers" class="answers"></div>
+<p id="feedback" class="feedback"></p>
+<div class="row">
+<button id="hint" class="gold">💡 تلميح (-3)</button>
+<button id="skip" class="secondary">تخطَّ</button>
+<button id="quizHome" class="secondary">الرئيسية</button>
+</div>
+</section>
 
-    <div class="panel">
-      <h2 id="welcome">مرحبًا بك في QUIZ KING! 👑</h2>
-      <p class="muted" id="welcomeText">
-        ابدأ بالمستوى المتوسط، ثم انتقل تدريجيًا إلى الأسئلة الصعبة جدًا.
-        اجمع النقاط واستخدمها للحصول على التلميحات.
-      </p>
+<section id="result" class="panel hidden">
+<h2 id="resultTitle">انتهت الجولة!</h2>
+<p id="resultText"></p>
+<div class="row">
+<button id="again" class="primary">العب مجددًا</button>
+<button id="resultHome" class="secondary">الرئيسية</button>
+</div>
+</section>
 
-      <div class="grid">
+<section id="memory" class="panel hidden">
+<h2 data-t="memory">لعبة الذاكرة</h2>
+<p id="memoryHelp">اعثر على البطاقات المتطابقة.</p>
+<div id="memoryGrid"></div>
+<p id="memoryStatus" class="feedback"></p>
+<div class="row">
+<button id="memoryAgain" class="primary">إعادة اللعب</button>
+<button id="memoryHome" class="secondary">الرئيسية</button>
+</div>
+</section>
 
-        <button class="game-card" onclick="startQuiz('general')">
-          <span class="game-icon">🧠</span>
-          <strong id="gameGeneral">المعرفة العامة</strong>
-          <small id="descGeneral">علوم، تاريخ، جغرافيا وثقافة</small>
-        </button>
+<section id="ttt" class="panel hidden">
+<h2 data-t="ttt">إكس-أو</h2>
+<p id="tttStatus"></p>
+<div id="tttGrid"></div>
+<div class="row">
+<button id="tttAgain" class="primary">إعادة اللعب</button>
+<button id="tttHome" class="secondary">الرئيسية</button>
+</div>
+</section>
+<footer>QUIZ KING</footer>
+</main>
 
-        <button class="game-card" onclick="startQuiz('actors')">
-          <span class="game-icon">🎬</span>
-          <strong id="gameActors">تحدي الممثلين</strong>
-          <small id="descActors">تعرف على الشخصية من صورتها</small>
-        </button>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
 
-        <button class="game-card" onclick="startQuiz('football')">
-          <span class="game-icon">⚽</span>
-          <strong id="gameFootball">تحدي كرة القدم</strong>
-          <small id="descFootball">اللاعبون والأندية ومسيرتهم</small>
-        </button>
+const words={
+ar:{
+tagline:"اختبر ذكاءك واجمع النقاط!",points:"النقاط",welcome:"اختر لعبة",intro:"الإجابة الصحيحة = 10 نقاط، والتلميح يكلف 3 نقاط.",
+general:"ثقافة عامة",generalSub:"أسئلة متنوعة",football:"كرة القدم",footballSub:"لاعبون وأندية",
+movies:"الأفلام والممثلون",moviesSub:"أسئلة عن النجوم",flags:"أعلام الدول",flagsSub:"اكتشف الدولة",
+landmarks:"معالم العالم",landmarksSub:"أماكن مشهورة",cars:"السيارات",carsSub:"ماركات ومعلومات",
+who:"من أنا؟",whoSub:"اكتشف الشخصية",memory:"لعبة الذاكرة",memorySub:"اعثر على الأزواج",
+ttt:"إكس-أو",tttSub:"ضد الكمبيوتر",time:"الوقت",hint:"💡 تلميح (-3)",skip:"تخطَّ",home:"الرئيسية",
+correct:"إجابة صحيحة! +10 نقاط",wrong:"إجابة خاطئة!",timeout:"انتهى الوقت!",next:"السؤال التالي",
+finish:"انتهت الجولة!",again:"العب مجددًا",hintNo:"تحتاج إلى 3 نقاط للتلميح.",
+memoryHelp:"اكشف البطاقات واعثر على الأزواج المتطابقة.",youWin:"فزت! +10 نقاط",
+computerWin:"فاز الكمبيوتر.",draw:"تعادل!",you:"أنت X والكمبيوتر O.",
+result:"أجبت بشكل صحيح عن {n} من {total} سؤالًا. مجموع نقاطك: {score}",
+question:"السؤال"
+},
+fr:{
+tagline:"Testez vos connaissances et gagnez des points !",points:"Points",welcome:"Choisissez un jeu",
+intro:"Bonne réponse = 10 points. Un indice coûte 3 points.",
+general:"Culture générale",generalSub:"Questions variées",football:"Football",footballSub:"Joueurs et clubs",
+movies:"Films et acteurs",moviesSub:"Questions sur les stars",flags:"Drapeaux",flagsSub:"Trouvez le pays",
+landmarks:"Monuments",landmarksSub:"Lieux célèbres",cars:"Voitures",carsSub:"Marques et infos",
+who:"Qui suis-je ?",whoSub:"Devinez la personne",memory:"Jeu de mémoire",memorySub:"Trouvez les paires",
+ttt:"Morpion",tttSub:"Contre l’ordinateur",time:"Temps",hint:"💡 Indice (-3)",skip:"Passer",home:"Accueil",
+correct:"Bonne réponse ! +10 points",wrong:"Mauvaise réponse !",timeout:"Temps écoulé !",next:"Question suivante",
+finish:"Manche terminée !",again:"Rejouer",hintNo:"Il vous faut 3 points pour un indice.",
+memoryHelp:"Trouvez les cartes identiques.",youWin:"Vous avez gagné ! +10 points",
+computerWin:"L’ordinateur a gagné.",draw:"Match nul !",you:"Vous êtes X, l’ordinateur est O.",
+result:"Vous avez {n} bonnes réponses sur {total}. Total : {score} points",
+question:"Question"
+},
+en:{
+tagline:"Test your knowledge and earn points!",points:"Points",welcome:"Choose a game",
+intro:"Correct answer = 10 points. A hint costs 3 points.",
+general:"General knowledge",generalSub:"Mixed questions",football:"Football",footballSub:"Players and clubs",
+movies:"Movies and actors",moviesSub:"Questions about stars",flags:"Flags",flagsSub:"Name the country",
+landmarks:"World landmarks",landmarksSub:"Famous places",cars:"Cars",carsSub:"Brands and facts",
+who:"Who am I?",whoSub:"Guess the person",memory:"Memory game",memorySub:"Find matching pairs",
+ttt:"Tic-tac-toe",tttSub:"Against the computer",time:"Time",hint:"💡 Hint (-3)",skip:"Skip",home:"Home",
+correct:"Correct! +10 points",wrong:"Wrong answer!",timeout:"Time is up!",next:"Next question",
+finish:"Round finished!",again:"Play again",hintNo:"You need 3 points for a hint.",
+memoryHelp:"Find matching cards.",youWin:"You won! +10 points",
+computerWin:"The computer won.",draw:"It's a draw!",you:"You are X and the computer is O.",
+result:"You got {n} out of {total} correct. Total: {score} points",
+question:"Question"
+}
+};
 
-        <button class="game-card" onclick="startQuiz('places')">
-          <span class="game-icon">🌍</span>
-          <strong id="gamePlaces">معالم العالم</strong>
-          <small id="descPlaces">تعرف على الأماكن من صورها</small>
-        </button>
+const questions={
+general:[
+["ما أكبر كوكب في المجموعة الشمسية؟","What is the largest planet in the Solar System?","Quelle est la plus grande planète du système solaire?",["المريخ","المشتري","الزهرة","عطارد"],["Mars","Jupiter","Venus","Mercury"],["Mars","Jupiter","Vénus","Mercure"],1,"كوكب غازي عملاق."],
+["ما عاصمة اليابان؟","What is the capital of Japan?","Quelle est la capitale du Japon?",["كيوتو","أوساكا","طوكيو","ناغويا"],["Kyoto","Osaka","Tokyo","Nagoya"],["Kyoto","Osaka","Tokyo","Nagoya"],2,"عاصمة اليابان."],
+["كم ضلعًا للشكل السداسي؟","How many sides does a hexagon have?","Combien de côtés a un hexagone?",["5","6","7","8"],["5","6","7","8"],["5","6","7","8"],1,"أكثر من خمسة بواحد."],
+["ما الغاز الذي تمتصه النباتات؟","Which gas do plants absorb?","Quel gaz les plantes absorbent-elles?",["الأكسجين","ثاني أكسيد الكربون","الهيدروجين","الهيليوم"],["Oxygen","Carbon dioxide","Hydrogen","Helium"],["Oxygène","Dioxyde de carbone","Hydrogène","Hélium"],1,"تحتاجه النباتات في البناء الضوئي."],
+["ما أسرع حيوان بري؟","What is the fastest land animal?","Quel est l’animal terrestre le plus rapide?",["الأسد","الفهد","الحصان","النمر"],["Lion","Cheetah","Horse","Leopard"],["Lion","Guépard","Cheval","Léopard"],1,"حيوان مرقط سريع جدًا."],
+["في أي قارة تقع الجزائر؟","Which continent is Algeria in?","Sur quel continent se trouve l’Algérie?",["آسيا","أفريقيا","أوروبا","أمريكا الجنوبية"],["Asia","Africa","Europe","South America"],["Asie","Afrique","Europe","Amérique du Sud"],1,"تقع شمال هذه القارة."],
+["ما العضو الذي يضخ الدم؟","Which organ pumps blood?","Quel organe pompe le sang?",["الكبد","الرئتان","القلب","الكلى"],["Liver","Lungs","Heart","Kidney"],["Foie","Poumons","Cœur","Rein"],2,"يوجد في الصدر."],
+["كم دقيقة في ساعتين؟","How many minutes are in two hours?","Combien de minutes dans deux heures?",["60","90","120","180"],["60","90","120","180"],["60","90","120","180"],2,"الساعة فيها 60 دقيقة."],
+["ما عاصمة فرنسا؟","What is the capital of France?","Quelle est la capitale de la France?",["مدريد","باريس","روما","لندن"],["Madrid","Paris","Rome","London"],["Madrid","Paris","Rome","Londres"],1,"مدينة برج إيفل."],
+["ما اللغة الرسمية في البرازيل؟","What is Brazil's official language?","Quelle est la langue officielle du Brésil?",["الإسبانية","البرتغالية","الفرنسية","الإنجليزية"],["Spanish","Portuguese","French","English"],["Espagnol","Portugais","Français","Anglais"],1,"ليست الإسبانية."]
+],
+football:[
+["من فاز بكأس العالم 2022؟","Who won the 2022 World Cup?","Qui a remporté la Coupe du monde 2022?",["فرنسا","البرازيل","الأرجنتين","ألمانيا"],["France","Brazil","Argentina","Germany"],["France","Brésil","Argentine","Allemagne"],2,"ليونيل ميسي قائد المنتخب."],
+["كم لاعبًا يبدأ المباراة في كل فريق؟","How many players start for each team?","Combien de joueurs débutent par équipe?",["9","10","11","12"],["9","10","11","12"],["9","10","11","12"],2,"يشمل حارس المرمى."],
+["أين يلعب ريال مدريد؟","Where does Real Madrid play?","Où joue le Real Madrid?",["إنجلترا","إسبانيا","إيطاليا","ألمانيا"],["England","Spain","Italy","Germany"],["Angleterre","Espagne","Italie","Allemagne"],1,"مدريد عاصمتها."],
+["من اللاعب المعروف بلقب البرغوث؟","Who is nicknamed La Pulga?","Qui est surnommé La Pulga?",["رونالدو","ميسي","نيمار","مبابي"],["Ronaldo","Messi","Neymar","Mbappé"],["Ronaldo","Messi","Neymar","Mbappé"],1,"لاعب أرجنتيني."],
+["ما مركز اللاعب الذي يحمي المرمى؟","Which position protects the goal?","Quel poste protège le but?",["مهاجم","حارس المرمى","جناح","وسط"],["Forward","Goalkeeper","Winger","Midfielder"],["Attaquant","Gardien","Ailier","Milieu"],1,"يرتدي غالبًا قميصًا مختلفًا."]
+],
+movies:[
+["من لعب دور جاك في فيلم Titanic؟","Who played Jack in Titanic?","Qui joue Jack dans Titanic?",["براد بيت","ليوناردو دي كابريو","توم كروز","مات ديمون"],["Brad Pitt","Leonardo DiCaprio","Tom Cruise","Matt Damon"],["Brad Pitt","Leonardo DiCaprio","Tom Cruise","Matt Damon"],1,"لعب أيضًا في Inception.","https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_2014.jpg/480px-Leonardo_Dicaprio_2014.jpg"],
+["من أدى دور Iron Man؟","Who played Iron Man?","Qui a joué Iron Man?",["كريس إيفانز","روبرت داوني جونيور","كريس هيمسورث","مارك روفالو"],["Chris Evans","Robert Downey Jr.","Chris Hemsworth","Mark Ruffalo"],["Chris Evans","Robert Downey Jr.","Chris Hemsworth","Mark Ruffalo"],1,"اسمه روبرت داوني جونيور.","https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Robert_Downey_Jr_2014_Comic_Con_%28cropped%29.jpg/480px-Robert_Downey_Jr_2014_Comic_Con_%28cropped%29.jpg"],
+["من اشتهر بشخصية Mr. Bean؟","Who is famous for Mr. Bean?","Qui est célèbre pour Mr Bean?",["روان أتكينسون","هيو غرانت","دانيال كريغ","توم هانكس"],["Rowan Atkinson","Hugh Grant","Daniel Craig","Tom Hanks"],["Rowan Atkinson","Hugh Grant","Daniel Craig","Tom Hanks"],0,"ممثل كوميدي بريطاني."],
+["من أخرج Jurassic Park؟","Who directed Jurassic Park?","Qui a réalisé Jurassic Park?",["جيمس كاميرون","ستيفن سبيلبرغ","جورج لوكاس","ريدلي سكوت"],["James Cameron","Steven Spielberg","George Lucas","Ridley Scott"],["James Cameron","Steven Spielberg","George Lucas","Ridley Scott"],1,"أخرج أيضًا E.T."],
+["في أي سلسلة يظهر هاري بوتر؟","Which series features Harry Potter?","Dans quelle saga trouve-t-on Harry Potter?",["الهوبيت","هاري بوتر","حرب النجوم","ألعاب الجوع"],["The Hobbit","Harry Potter","Star Wars","The Hunger Games"],["Le Hobbit","Harry Potter","Star Wars","Hunger Games"],1,"يتعلم السحر في هوجورتس."]
+],
+flags:[
+["🇩🇿 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["تونس","الجزائر","باكستان","تركيا"],["Tunisia","Algeria","Pakistan","Turkey"],["Tunisie","Algérie","Pakistan","Turquie"],1,"تقع في شمال أفريقيا."],
+["🇯🇵 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["الصين","اليابان","كوريا الجنوبية","فيتنام"],["China","Japan","South Korea","Vietnam"],["Chine","Japon","Corée du Sud","Vietnam"],1,"عاصمتها طوكيو."],
+["🇧🇷 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["البرتغال","البرازيل","المكسيك","الأرجنتين"],["Portugal","Brazil","Mexico","Argentina"],["Portugal","Brésil","Mexique","Argentine"],1,"تشتهر بغابات الأمازون."],
+["🇫🇷 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["فرنسا","إيطاليا","هولندا","روسيا"],["France","Italy","Netherlands","Russia"],["France","Italie","Pays-Bas","Russie"],0,"عاصمتها باريس."],
+["🇨🇦 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["النمسا","كندا","الدنمارك","سويسرا"],["Austria","Canada","Denmark","Switzerland"],["Autriche","Canada","Danemark","Suisse"],1,"تظهر ورقة القيقب على علمها."]
+],
+landmarks:[
+["في أي مدينة يوجد برج إيفل؟","Where is the Eiffel Tower?","Où se trouve la tour Eiffel?",["روما","باريس","لندن","مدريد"],["Rome","Paris","London","Madrid"],["Rome","Paris","Londres","Madrid"],1,"عاصمة فرنسا."],
+["في أي دولة توجد أهرامات الجيزة؟","Where are the Pyramids of Giza?","Où se trouvent les pyramides de Gizeh?",["المكسيك","مصر","الأردن","اليونان"],["Mexico","Egypt","Jordan","Greece"],["Mexique","Égypte","Jordanie","Grèce"],1,"تقع قرب القاهرة."],
+["في أي مدينة يوجد تمثال الحرية؟","Where is the Statue of Liberty?","Où se trouve la Statue de la Liberté?",["نيويورك","لوس أنجلوس","تورونتو","بوسطن"],["New York","Los Angeles","Toronto","Boston"],["New York","Los Angeles","Toronto","Boston"],0,"مدينة أمريكية على الساحل الشرقي."],
+["أين يقع تاج محل؟","Where is the Taj Mahal?","Où se trouve le Taj Mahal?",["الهند","باكستان","نيبال","تايلاند"],["India","Pakistan","Nepal","Thailand"],["Inde","Pakistan","Népal","Thaïlande"],0,"يقع في مدينة أغرا."],
+["أي مدينة تشتهر ببرجها المائل؟","Which city is famous for its leaning tower?","Quelle ville est célèbre pour sa tour penchée?",["ميلانو","بيزا","نابولي","تورينو"],["Milan","Pisa","Naples","Turin"],["Milan","Pise","Naples","Turin"],1,"اسم المدينة جزء من اسم البرج."]
+],
+cars:[
+["من يصنع سيارة كورولا؟","Who makes the Corolla?","Qui fabrique la Corolla?",["تويوتا","هوندا","فورد","بي إم دبليو"],["Toyota","Honda","Ford","BMW"],["Toyota","Honda","Ford","BMW"],0,"شركة يابانية."],
+["ما بلد Ferrari الأصلي؟","What is Ferrari's country of origin?","Quel est le pays d’origine de Ferrari?",["ألمانيا","إيطاليا","فرنسا","أمريكا"],["Germany","Italy","France","USA"],["Allemagne","Italie","France","États-Unis"],1,"علمه أخضر وأبيض وأحمر."],
+["أي شركة شعارها أربع حلقات؟","Which brand has four rings?","Quelle marque a quatre anneaux?",["أودي","مرسيدس","بيجو","فولفو"],["Audi","Mercedes-Benz","Peugeot","Volvo"],["Audi","Mercedes-Benz","Peugeot","Volvo"],0,"شركة سيارات ألمانية."],
+["من يصنع Mustang؟","Who makes the Mustang?","Qui fabrique la Mustang?",["شيفروليه","فورد","دودج","تسلا"],["Chevrolet","Ford","Dodge","Tesla"],["Chevrolet","Ford","Dodge","Tesla"],1,"علامة أمريكية."],
+["ما مصدر الطاقة في السيارة الكهربائية؟","What powers an electric car?","Qu’est-ce qui alimente une voiture électrique?",["البنزين","الديزل","كهرباء البطارية","البخار"],["Petrol","Diesel","Battery electricity","Steam"],["Essence","Diesel","Électricité de la batterie","Vapeur"],2,"تُخزّن الطاقة في بطارية."]
+],
+who:[
+["أنا لاعب أرجنتيني فزت بكأس العالم 2022. من أنا؟","I am an Argentine player who won the 2022 World Cup. Who am I?","Je suis un joueur argentin champion du monde 2022. Qui suis-je?",["ليونيل ميسي","نيمار","كريستيانو رونالدو","لويس سواريز"],["Lionel Messi","Neymar","Cristiano Ronaldo","Luis Suárez"],["Lionel Messi","Neymar","Cristiano Ronaldo","Luis Suárez"],0,"ألعب غالبًا بالرقم 10."],
+["أنا عالم طوّر نظرية النسبية. من أنا؟","I developed the theory of relativity. Who am I?","J’ai développé la théorie de la relativité. Qui suis-je?",["إسحاق نيوتن","ألبرت أينشتاين","غاليليو","نيكولا تسلا"],["Isaac Newton","Albert Einstein","Galileo Galilei","Nikola Tesla"],["Isaac Newton","Albert Einstein","Galileo Galilei","Nikola Tesla"],1,"شعري معروف بأنه منفوش."],
+["أنا معروف بلقب ملك البوب. من أنا؟","I am known as the King of Pop. Who am I?","Je suis surnommé le roi de la pop. Qui suis-je?",["إلفيس بريسلي","مايكل جاكسون","فريدي ميركوري","برنس"],["Elvis Presley","Michael Jackson","Freddie Mercury","Prince"],["Elvis Presley","Michael Jackson","Freddie Mercury","Prince"],1,"من أشهر أغنياتي Thriller."]
+]
+};
 
-        <button class="game-card" onclick="startQuiz('flags')">
-          <span class="game-icon">🏳️</span>
-          <strong id="gameFlags">تحدي الأعلام</strong>
-          <small id="descFlags">اكتشف الدولة من علمها</small>
-        </button>
+const names={general:"general",football:"football",movies:"movies",flags:"flags",landmarks:"landmarks",cars:"cars",who:"who"};
+let lang=localStorage.getItem("qk_language")||"ar";
+let points=Number(localStorage.getItem("qk_points")||0);
+let game="general",list=[],index=0,correct=0,time=20,timerId=null,answered=false,hinted=false,lastGame="general";
 
-        <button class="game-card" onclick="startQuiz('cars')">
-          <span class="game-icon">🚗</span>
-          <strong id="gameCars">تحدي السيارات</strong>
-          <small id="descCars">ماركات السيارات وشعاراتها</small>
-        </button>
+function tr(k){return words[lang][k]||words.en[k]||k}
+function save(){localStorage.setItem("qk_points",points);$("points").textContent=poiles plantes absorbent-elles?",["الأكسجين","ثاني أكسيد الكربون","الهيدروجين","الهيليوم"],["Oxygen","Carbon dioxide","Hydrogen","Helium"],["Oxygène","Dioxyde de carbone","Hydrogène","Hélium"],1,"تحتاجه النباتات في البناء الضوئي."],
+["ما أسرع حيوان بري؟","What is the fastest land animal?","Quel est l’animal terrestre le plus rapide?",["الأسد","الفهد","الحصان","النمر"],["Lion","Cheetah","Horse","Leopard"],["Lion","Guépard","Cheval","Léopard"],1,"حيوان مرقط سريع جدًا."],
+["في أي قارة تقع الجزائر؟","Which continent is Algeria in?","Sur quel continent se trouve l’Algérie?",["آسيا","أفريقيا","أوروبا","أمريكا الجنوبية"],["Asia","Africa","Europe","South America"],["Asie","Afrique","Europe","Amérique du Sud"],1,"تقع شمال هذه القارة."],
+["ما العضو الذي يضخ الدم؟","Which organ pumps blood?","Quel organe pompe le sang?",["الكبد","الرئتان","القلب","الكلى"],["Liver","Lungs","Heart","Kidney"],["Foie","Poumons","Cœur","Rein"],2,"يوجد في الصدر."],
+["كم دقيقة في ساعتين؟","How many minutes are in two hours?","Combien de minutes dans deux heures?",["60","90","120","180"],["60","90","120","180"],["60","90","120","180"],2,"الساعة فيها 60 دقيقة."],
+["ما عاصمة فرنسا؟","What is the capital of France?","Quelle est la capitale de la France?",["مدريد","باريس","روما","لندن"],["Madrid","Paris","Rome","London"],["Madrid","Paris","Rome","Londres"],1,"مدينة برج إيفل."],
+["ما اللغة الرسمية في البرازيل؟","What is Brazil's official language?","Quelle est la langue officielle du Brésil?",["الإسبانية","البرتغالية","الفرنسية","الإنجليزية"],["Spanish","Portuguese","French","English"],["Espagnol","Portugais","Français","Anglais"],1,"ليست الإسبانية."]
+],
+football:[
+["من فاز بكأس العالم 2022؟","Who won the 2022 World Cup?","Qui a remporté la Coupe du monde 2022?",["فرنسا","البرازيل","الأرجنتين","ألمانيا"],["France","Brazil","Argentina","Germany"],["France","Brésil","Argentine","Allemagne"],2,"ليونيل ميسي قائد المنتخب."],
+["كم لاعبًا يبدأ المباراة في كل فريق؟","How many players start for each team?","Combien de joueurs débutent par équipe?",["9","10","11","12"],["9","10","11","12"],["9","10","11","12"],2,"يشمل حارس المرمى."],
+["أين يلعب ريال مدريد؟","Where does Real Madrid play?","Où joue le Real Madrid?",["إنجلترا","إسبانيا","إيطاليا","ألمانيا"],["England","Spain","Italy","Germany"],["Angleterre","Espagne","Italie","Allemagne"],1,"مدريد عاصمتها."],
+["من اللاعب المعروف بلقب البرغوث؟","Who is nicknamed La Pulga?","Qui est surnommé La Pulga?",["رونالدو","ميسي","نيمار","مبابي"],["Ronaldo","Messi","Neymar","Mbappé"],["Ronaldo","Messi","Neymar","Mbappé"],1,"لاعب أرجنتيني."],
+["ما مركز اللاعب الذي يحمي المرمى؟","Which position protects the goal?","Quel poste protège le but?",["مهاجم","حارس المرمى","جناح","وسط"],["Forward","Goalkeeper","Winger","Midfielder"],["Attaquant","Gardien","Ailier","Milieu"],1,"يرتدي غالبًا قميصًا مختلفًا."]
+],
+movies:[
+["من لعب دور جاك في فيلم Titanic؟","Who played Jack in Titanic?","Qui joue Jack dans Titanic?",["براد بيت","ليوناردو دي كابريو","توم كروز","مات ديمون"],["Brad Pitt","Leonardo DiCaprio","Tom Cruise","Matt Damon"],["Brad Pitt","Leonardo DiCaprio","Tom Cruise","Matt Damon"],1,"لعب أيضًا في Inception.","https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_2014.jpg/480px-Leonardo_Dicaprio_2014.jpg"],
+["من أدى دور Iron Man؟","Who played Iron Man?","Qui a joué Iron Man?",["كريس إيفانز","روبرت داوني جونيور","كريس هيمسورث","مارك روفالو"],["Chris Evans","Robert Downey Jr.","Chris Hemsworth","Mark Ruffalo"],["Chris Evans","Robert Downey Jr.","Chris Hemsworth","Mark Ruffalo"],1,"اسمه روبرت داوني جونيور.","https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Robert_Downey_Jr_2014_Comic_Con_%28cropped%29.jpg/480px-Robert_Downey_Jr_2014_Comic_Con_%28cropped%29.jpg"],
+["من اشتهر بشخصية Mr. Bean؟","Who is famous for Mr. Bean?","Qui est célèbre pour Mr Bean?",["روان أتكينسون","هيو غرانت","دانيال كريغ","توم هانكس"],["Rowan Atkinson","Hugh Grant","Daniel Craig","Tom Hanks"],["Rowan Atkinson","Hugh Grant","Daniel Craig","Tom Hanks"],0,"ممثل كوميدي بريطاني."],
+["من أخرج Jurassic Park؟","Who directed Jurassic Park?","Qui a réalisé Jurassic Park?",["جيمس كاميرون","ستيفن سبيلبرغ","جورج لوكاس","ريدلي سكوت"],["James Cameron","Steven Spielberg","George Lucas","Ridley Scott"],["James Cameron","Steven Spielberg","George Lucas","Ridley Scott"],1,"أخرج أيضًا E.T."],
+["في أي سلسلة يظهر هاري بوتر؟","Which series features Harry Potter?","Dans quelle saga trouve-t-on Harry Potter?",["الهوبيت","هاري بوتر","حرب النجوم","ألعاب الجوع"],["The Hobbit","Harry Potter","Star Wars","The Hunger Games"],["Le Hobbit","Harry Potter","Star Wars","Hunger Games"],1,"يتعلم السحر في هوجورتس."]
+],
+flags:[
+["🇩🇿 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["تونس","الجزائر","باكستان","تركيا"],["Tunisia","Algeria","Pakistan","Turkey"],["Tunisie","Algérie","Pakistan","Turquie"],1,"تقع في شمال أفريقيا."],
+["🇯🇵 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["الصين","اليابان","كوريا الجنوبية","فيتنام"],["China","Japan","South Korea","Vietnam"],["Chine","Japon","Corée du Sud","Vietnam"],1,"عاصمتها طوكيو."],
+["🇧🇷 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["البرتغال","البرازيل","المكسيك","الأرجنتين"],["Portugal","Brazil","Mexico","Argentina"],["Portugal","Brésil","Mexique","Argentine"],1,"تشتهر بغابات الأمازون."],
+["🇫🇷 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["فرنسا","إيطاليا","هولندا","روسيا"],["France","Italy","Netherlands","Russia"],["France","Italie","Pays-Bas","Russie"],0,"عاصمتها باريس."],
+["🇨🇦 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["النمسا","كندا","الدنمارك","سويسرا"],["Austria","Canada","Denmark","Switzerland"],["Autriche","Canada","Danemark","Suisse"],1,"تظهر ورقة القيقب على علمها."]
+],
+landmarks:[
+["في أي مدينة يوجد برج إيفل؟","Where is the Eiffel Tower?","Où se trouve la tour Eiffel?",["روما","باريس","لندن","مدريد"],["Rome","Paris","London","Madrid"],["Rome","Paris","Londres","Madrid"],1,"عاصمة فرنسا."],
+["في أي دولة توجد أهرامات الجيزة؟","Where are the Pyramids of Giza?","Où se trouvent les pyramides de Gizeh?",["المكسيك","مصر","الأردن","اليونان"],["Mexico","Egypt","Jordan","Greece"],["Mexique","Égypte","Jordanie","Grèce"],1,"تقع قرب القاهرة."],
+["في أي مدينة يوجد تمثال الحرية؟","Where is the Statue of Liberty?","Où se trouve la Statue de la Liberté?",["نيويورك","لوس أنجلوس","تورونتو","بوسطن"],["New York","Los Angeles","Toronto","Boston"],["New York","Los Angeles","Toronto","Boston"],0,"مدينة أمريكية على الساحل الشرقي."],
+["أين يقع تاج محل؟","Where is the Taj Mahal?","Où se trouve le Taj Mahal?",["الهند","باكستان","نيبال","تايلاند"],["India","Pakistan","Nepal","Thailand"],["Inde","Pakistan","Népal","Thaïlande"],0,"يقع في مدينة أغرا."],
+["أي مدينة تشتهر ببرجها المائل؟","Which city is famous for its leaning tower?","Quelle ville est célèbre pour sa tour penchée?",["ميلانو","بيزا","نابولي","تورينو"],["Milan","Pisa","Naples","Turin"],["Milan","Pise","Naples","Turin"],1,"اسم المدينة جزء من اسم البرج."]
+],
+cars:[
+["من يصنع سيارة كورولا؟","Who makes the Corolla?","Qui fabrique la Corolla?",["تويوتا","هوندا","فورد","بي إم دبليو"],["Toyota","Honda","Ford","BMW"],["Toyota","Honda","Ford","BMW"],0,"شركة يابانية."],
+["ما بلد Ferrari الأصلي؟","What is Ferrari's country of origin?","Quel est le pays d’origine de Ferrari?",["ألمانيا","إيطاليا","فرنسا","أمريكا"],["Germany","Italy","France","USA"],["Allemagne","Italie","France","États-Unis"],1,"علمه أخضر وأبيض وأحمر."],
+["أي شركة شعارها أربع حلقات؟","Which brand has four rings?","Quelle marque a quatre anneaux?",["أودي","مرسيدس","بيجو","فولفو"],["Audi","Mercedes-Benz","Peugeot","Volvo"],["Audi","Mercedes-Benz","Peugeot","Volvo"],0,"شركة سيارات ألمانية."],
+["من يصنع Mustang؟","Who makes the Mustang?","Qui fabrique la Mustang?",["شيفروليه","فورد","دودج","تسلا"],["Chevrolet","Ford","Dodge","Tesla"],["Chevrolet","Ford","Dodge","Tesla"],1,"علامة أمريكية."],
+["ما مصدر الطاقة في السيارة الكهربائية؟","What powers an electric car?","Qu’est-ce qui alimente une voiture électrique?",["البنزين","الديزل","كهرباء البطارية","البخار"],["Petrol","Diesel","Battery electricity","Steam"],["Essence","Diesel","Électricité de la batterie","Vapeur"],2,"تُخزّن الطاقة في بطارية."]
+],
+who:[
+["أنا لاعب أرجنتيني فزت بكأس العالم 2022. من أنا؟","I am an Argentine player who won the 2022 World Cup. Who am I?","Je suis un joueur argentin champion du monde 2022. Qui suis-je?",["ليونيل ميسي","نيمار","كريستيانو رونالدو","لويس سواريز"],["Lionel Messi","Neymar","Cristiano Ronaldo","Luis Suárez"],["Lionel Messi","Neymar","Cristiano Ronaldo","Luis Suárez"],0,"ألعب غالبًا بالرقم 10."],
+["أنا عالم طوّر نظرية النسبية. من أنا؟","I developed the theory of relativity. Who am I?","J’ai développé la théorie de la relativité. Qui suis-je?",["إسحاق نيوتن","ألبرت أينشتاين","غاليليو","نيكولا تسلا"],["Isaac Newton","Albert Einstein","Galileo Galilei","Nikola Tesla"],["Isaac Newton","Albert Einstein","Galileo Galilei","Nikola Tesla"],1,"شعري معروف بأنه منفوش."],
+["أنا معروف بلقب ملك البوب. من أنا؟","I am known as the King of Pop. Who am I?","Je suis surnommé le roi de la pop. Qui suis-je?",["إلفيس بريسلي","مايكل جاكسون","فريدي ميركوري","برنس"],["Elvis Presley","Michael Jackson","Freddie Mercury","Prince"],["Elvis Presley","Michael Jackson","Freddie Mercury","Prince"],1,"من أشهر أغنياتي Thriller."]
+]
+};
 
-        <button class="game-card" onclick="startWho()">
-          <span class="game-icon">🕵️</span>
-          <strong id="gameWho">من أنا؟</strong>
-          <small id="descWho">استنتج الشخصية من التلميحات</small>
-        </button>
+const names={general:"general",football:"football",movies:"movies",flags:"flags",landmarks:"landmarks",cars:"cars",who:"who"};
+let lang=localStorage.getItem("qk_language")||"ar";
+let points=Number(localStorage.getItem("qk_points")||0);
+let game="general",list=[],index=0,correct=0,time=20,timerId=null,answered=false,hinted=false,lastGame="general";
 
-        <button class="game-card" onclick="startMemory()">
-          <span class="game-icon">🧩</span>
-          <strong id="gameMemory">لعبة الذاكرة</strong>
-          <small id="descMemory">اعثر على البطاقات المتشابهة</small>
-        </button>
-
-        <button class="game-card" onclick="startTicTacToe()">
-          <span class="game-icon">⭕</span>
-          <strong id="gameTic">إكس أو</strong>
-          <small id="descTic">العب ضد الكمبيوتر</small>
-        </button>
-
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2 id="profileTitle">📊 إحصائياتي</h2>
-      <p id="stats">الإجابات الصحيحة: 0 | الأسئلة المجاب عنها: 0</p>
-      <button class="secondary" onclick="resetStats()" id="resetBtn">
-        إعادة ضبط النقاط والإحصائيات
-      </button>
-    </div>
-
-  </section>
-
-  <section id="quiz" class="hidden">
-
-    <div class="panel">
-
-      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
-        <span class="badge" id="categoryLabel">المعرفة العامة</span>
-        <span class="badge" id="difficulty">متوسط</span>
-        <span class="badge">⏱️ <span id="timer">30</span></span>
-      </div>
-
-      <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-
-      <p class="muted" id="questionNumber">السؤال 1</p>
-
-      <h2 id="questionText">السؤال يظهر هنا</h2>
-
-      <div id="imageArea"></div>
-
-      <div id="answers" class="answers"></div>
-
-      <div id="feedback" class="feedback"></div>
-
-      <div class="menu-row">
-        <button class="gold-btn" onclick="useHint()" id="hintBtn">
-          💡 تلميح (3 نقاط)
-        </button>
-
-        <button class="secondary" onclick="skipQuestion()" id="skipBtn">
-          تخطي السؤال
-        </button>
-      </div>
-
-      <div class="menu-row">
-        <button class="secondary" onclick="backHome()" id="homeBtn">
-          🏠 الرئيسية
-        </button>
-      </div>
-
-    </div>
-
-  </section>
-
-  <section id="result" class="hidden">
-    <div class="panel" style="text-align:center">
-      <div style="font-size:60px">🏆</div>
-      <h2 id="resultTitle">انتهت الجولة!</h2>
-      <p id="resultText"></p>
+function tr(k){return words[lang][k]||words.en[k]||k}
+function save(){localStorage.setItem("qk_points",points);$("points").textContent=poi      <p id="resultText"></p>
       <button class="primary" onclick="backHome()" id="resultHome">
         العودة إلى الرئيسية
       </button>
