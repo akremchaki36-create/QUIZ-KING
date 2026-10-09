@@ -295,6 +295,62 @@ let points=Number(localStorage.getItem("qk_points")||0);
 let game="general",list=[],index=0,correct=0,time=20,timerId=null,answered=false,hinted=false,lastGame="general";
 
 function tr(k){return words[lang][k]||words.en[k]||k}
+function save(){localStorage.setItem("qk_points",points);$("points").textContent=poiles plantes absorbent-elles?",["الأكسجين","ثاني أكسيد الكربون","الهيدروجين","الهيليوم"],["Oxygen","Carbon dioxide","Hydrogen","Helium"],["Oxygène","Dioxyde de carbone","Hydrogène","Hélium"],1,"تحتاجه النباتات في البناء الضوئي."],
+["ما أسرع حيوان بري؟","What is the fastest land animal?","Quel est l’animal terrestre le plus rapide?",["الأسد","الفهد","الحصان","النمر"],["Lion","Cheetah","Horse","Leopard"],["Lion","Guépard","Cheval","Léopard"],1,"حيوان مرقط سريع جدًا."],
+["في أي قارة تقع الجزائر؟","Which continent is Algeria in?","Sur quel continent se trouve l’Algérie?",["آسيا","أفريقيا","أوروبا","أمريكا الجنوبية"],["Asia","Africa","Europe","South America"],["Asie","Afrique","Europe","Amérique du Sud"],1,"تقع شمال هذه القارة."],
+["ما العضو الذي يضخ الدم؟","Which organ pumps blood?","Quel organe pompe le sang?",["الكبد","الرئتان","القلب","الكلى"],["Liver","Lungs","Heart","Kidney"],["Foie","Poumons","Cœur","Rein"],2,"يوجد في الصدر."],
+["كم دقيقة في ساعتين؟","How many minutes are in two hours?","Combien de minutes dans deux heures?",["60","90","120","180"],["60","90","120","180"],["60","90","120","180"],2,"الساعة فيها 60 دقيقة."],
+["ما عاصمة فرنسا؟","What is the capital of France?","Quelle est la capitale de la France?",["مدريد","باريس","روما","لندن"],["Madrid","Paris","Rome","London"],["Madrid","Paris","Rome","Londres"],1,"مدينة برج إيفل."],
+["ما اللغة الرسمية في البرازيل؟","What is Brazil's official language?","Quelle est la langue officielle du Brésil?",["الإسبانية","البرتغالية","الفرنسية","الإنجليزية"],["Spanish","Portuguese","French","English"],["Espagnol","Portugais","Français","Anglais"],1,"ليست الإسبانية."]
+],
+football:[
+["من فاز بكأس العالم 2022؟","Who won the 2022 World Cup?","Qui a remporté la Coupe du monde 2022?",["فرنسا","البرازيل","الأرجنتين","ألمانيا"],["France","Brazil","Argentina","Germany"],["France","Brésil","Argentine","Allemagne"],2,"ليونيل ميسي قائد المنتخب."],
+["كم لاعبًا يبدأ المباراة في كل فريق؟","How many players start for each team?","Combien de joueurs débutent par équipe?",["9","10","11","12"],["9","10","11","12"],["9","10","11","12"],2,"يشمل حارس المرمى."],
+["أين يلعب ريال مدريد؟","Where does Real Madrid play?","Où joue le Real Madrid?",["إنجلترا","إسبانيا","إيطاليا","ألمانيا"],["England","Spain","Italy","Germany"],["Angleterre","Espagne","Italie","Allemagne"],1,"مدريد عاصمتها."],
+["من اللاعب المعروف بلقب البرغوث؟","Who is nicknamed La Pulga?","Qui est surnommé La Pulga?",["رونالدو","ميسي","نيمار","مبابي"],["Ronaldo","Messi","Neymar","Mbappé"],["Ronaldo","Messi","Neymar","Mbappé"],1,"لاعب أرجنتيني."],
+["ما مركز اللاعب الذي يحمي المرمى؟","Which position protects the goal?","Quel poste protège le but?",["مهاجم","حارس المرمى","جناح","وسط"],["Forward","Goalkeeper","Winger","Midfielder"],["Attaquant","Gardien","Ailier","Milieu"],1,"يرتدي غالبًا قميصًا مختلفًا."]
+],
+movies:[
+["من لعب دور جاك في فيلم Titanic؟","Who played Jack in Titanic?","Qui joue Jack dans Titanic?",["براد بيت","ليوناردو دي كابريو","توم كروز","مات ديمون"],["Brad Pitt","Leonardo DiCaprio","Tom Cruise","Matt Damon"],["Brad Pitt","Leonardo DiCaprio","Tom Cruise","Matt Damon"],1,"لعب أيضًا في Inception.","https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_2014.jpg/480px-Leonardo_Dicaprio_2014.jpg"],
+["من أدى دور Iron Man؟","Who played Iron Man?","Qui a joué Iron Man?",["كريس إيفانز","روبرت داوني جونيور","كريس هيمسورث","مارك روفالو"],["Chris Evans","Robert Downey Jr.","Chris Hemsworth","Mark Ruffalo"],["Chris Evans","Robert Downey Jr.","Chris Hemsworth","Mark Ruffalo"],1,"اسمه روبرت داوني جونيور.","https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Robert_Downey_Jr_2014_Comic_Con_%28cropped%29.jpg/480px-Robert_Downey_Jr_2014_Comic_Con_%28cropped%29.jpg"],
+["من اشتهر بشخصية Mr. Bean؟","Who is famous for Mr. Bean?","Qui est célèbre pour Mr Bean?",["روان أتكينسون","هيو غرانت","دانيال كريغ","توم هانكس"],["Rowan Atkinson","Hugh Grant","Daniel Craig","Tom Hanks"],["Rowan Atkinson","Hugh Grant","Daniel Craig","Tom Hanks"],0,"ممثل كوميدي بريطاني."],
+["من أخرج Jurassic Park؟","Who directed Jurassic Park?","Qui a réalisé Jurassic Park?",["جيمس كاميرون","ستيفن سبيلبرغ","جورج لوكاس","ريدلي سكوت"],["James Cameron","Steven Spielberg","George Lucas","Ridley Scott"],["James Cameron","Steven Spielberg","George Lucas","Ridley Scott"],1,"أخرج أيضًا E.T."],
+["في أي سلسلة يظهر هاري بوتر؟","Which series features Harry Potter?","Dans quelle saga trouve-t-on Harry Potter?",["الهوبيت","هاري بوتر","حرب النجوم","ألعاب الجوع"],["The Hobbit","Harry Potter","Star Wars","The Hunger Games"],["Le Hobbit","Harry Potter","Star Wars","Hunger Games"],1,"يتعلم السحر في هوجورتس."]
+],
+flags:[
+["🇩🇿 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["تونس","الجزائر","باكستان","تركيا"],["Tunisia","Algeria","Pakistan","Turkey"],["Tunisie","Algérie","Pakistan","Turquie"],1,"تقع في شمال أفريقيا."],
+["🇯🇵 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["الصين","اليابان","كوريا الجنوبية","فيتنام"],["China","Japan","South Korea","Vietnam"],["Chine","Japon","Corée du Sud","Vietnam"],1,"عاصمتها طوكيو."],
+["🇧🇷 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["البرتغال","البرازيل","المكسيك","الأرجنتين"],["Portugal","Brazil","Mexico","Argentina"],["Portugal","Brésil","Mexique","Argentine"],1,"تشتهر بغابات الأمازون."],
+["🇫🇷 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["فرنسا","إيطاليا","هولندا","روسيا"],["France","Italy","Netherlands","Russia"],["France","Italie","Pays-Bas","Russie"],0,"عاصمتها باريس."],
+["🇨🇦 إلى أي دولة ينتمي هذا العلم؟","Which country has this flag?","À quel pays appartient ce drapeau?",["النمسا","كندا","الدنمارك","سويسرا"],["Austria","Canada","Denmark","Switzerland"],["Autriche","Canada","Danemark","Suisse"],1,"تظهر ورقة القيقب على علمها."]
+],
+landmarks:[
+["في أي مدينة يوجد برج إيفل؟","Where is the Eiffel Tower?","Où se trouve la tour Eiffel?",["روما","باريس","لندن","مدريد"],["Rome","Paris","London","Madrid"],["Rome","Paris","Londres","Madrid"],1,"عاصمة فرنسا."],
+["في أي دولة توجد أهرامات الجيزة؟","Where are the Pyramids of Giza?","Où se trouvent les pyramides de Gizeh?",["المكسيك","مصر","الأردن","اليونان"],["Mexico","Egypt","Jordan","Greece"],["Mexique","Égypte","Jordanie","Grèce"],1,"تقع قرب القاهرة."],
+["في أي مدينة يوجد تمثال الحرية؟","Where is the Statue of Liberty?","Où se trouve la Statue de la Liberté?",["نيويورك","لوس أنجلوس","تورونتو","بوسطن"],["New York","Los Angeles","Toronto","Boston"],["New York","Los Angeles","Toronto","Boston"],0,"مدينة أمريكية على الساحل الشرقي."],
+["أين يقع تاج محل؟","Where is the Taj Mahal?","Où se trouve le Taj Mahal?",["الهند","باكستان","نيبال","تايلاند"],["India","Pakistan","Nepal","Thailand"],["Inde","Pakistan","Népal","Thaïlande"],0,"يقع في مدينة أغرا."],
+["أي مدينة تشتهر ببرجها المائل؟","Which city is famous for its leaning tower?","Quelle ville est célèbre pour sa tour penchée?",["ميلانو","بيزا","نابولي","تورينو"],["Milan","Pisa","Naples","Turin"],["Milan","Pise","Naples","Turin"],1,"اسم المدينة جزء من اسم البرج."]
+],
+cars:[
+["من يصنع سيارة كورولا؟","Who makes the Corolla?","Qui fabrique la Corolla?",["تويوتا","هوندا","فورد","بي إم دبليو"],["Toyota","Honda","Ford","BMW"],["Toyota","Honda","Ford","BMW"],0,"شركة يابانية."],
+["ما بلد Ferrari الأصلي؟","What is Ferrari's country of origin?","Quel est le pays d’origine de Ferrari?",["ألمانيا","إيطاليا","فرنسا","أمريكا"],["Germany","Italy","France","USA"],["Allemagne","Italie","France","États-Unis"],1,"علمه أخضر وأبيض وأحمر."],
+["أي شركة شعارها أربع حلقات؟","Which brand has four rings?","Quelle marque a quatre anneaux?",["أودي","مرسيدس","بيجو","فولفو"],["Audi","Mercedes-Benz","Peugeot","Volvo"],["Audi","Mercedes-Benz","Peugeot","Volvo"],0,"شركة سيارات ألمانية."],
+["من يصنع Mustang؟","Who makes the Mustang?","Qui fabrique la Mustang?",["شيفروليه","فورد","دودج","تسلا"],["Chevrolet","Ford","Dodge","Tesla"],["Chevrolet","Ford","Dodge","Tesla"],1,"علامة أمريكية."],
+["ما مصدر الطاقة في السيارة الكهربائية؟","What powers an electric car?","Qu’est-ce qui alimente une voiture électrique?",["البنزين","الديزل","كهرباء البطارية","البخار"],["Petrol","Diesel","Battery electricity","Steam"],["Essence","Diesel","Électricité de la batterie","Vapeur"],2,"تُخزّن الطاقة في بطارية."]
+],
+who:[
+["أنا لاعب أرجنتيني فزت بكأس العالم 2022. من أنا؟","I am an Argentine player who won the 2022 World Cup. Who am I?","Je suis un joueur argentin champion du monde 2022. Qui suis-je?",["ليونيل ميسي","نيمار","كريستيانو رونالدو","لويس سواريز"],["Lionel Messi","Neymar","Cristiano Ronaldo","Luis Suárez"],["Lionel Messi","Neymar","Cristiano Ronaldo","Luis Suárez"],0,"ألعب غالبًا بالرقم 10."],
+["أنا عالم طوّر نظرية النسبية. من أنا؟","I developed the theory of relativity. Who am I?","J’ai développé la théorie de la relativité. Qui suis-je?",["إسحاق نيوتن","ألبرت أينشتاين","غاليليو","نيكولا تسلا"],["Isaac Newton","Albert Einstein","Galileo Galilei","Nikola Tesla"],["Isaac Newton","Albert Einstein","Galileo Galilei","Nikola Tesla"],1,"شعري معروف بأنه منفوش."],
+["أنا معروف بلقب ملك البوب. من أنا؟","I am known as the King of Pop. Who am I?","Je suis surnommé le roi de la pop. Qui suis-je?",["إلفيس بريسلي","مايكل جاكسون","فريدي ميركوري","برنس"],["Elvis Presley","Michael Jackson","Freddie Mercury","Prince"],["Elvis Presley","Michael Jackson","Freddie Mercury","Prince"],1,"من أشهر أغنياتي Thriller."]
+]
+};
+
+const names={general:"general",football:"football",movies:"movies",flags:"flags",landmarks:"landmarks",cars:"cars",who:"who"};
+let lang=localStorage.getItem("qk_language")||"ar";
+let points=Number(localStorage.getItem("qk_points")||0);
+let game="general",list=[],index=0,correct=0,time=20,timerId=null,answered=false,hinted=false,lastGame="general";
+
+function tr(k){return words[lang][k]||words.en[k]||k}
 function save(){localStorage.setItem("qk_points",points);$("points").textContent=poi      <p id="resultText"></p>
       <button class="primary" onclick="backHome()" id="resultHome">
         العودة إلى الرئيسية
@@ -596,3 +652,4 @@ function updateStats() {
   document.getElementById("stats").textContent =
     t("correctCount") + ": " + totalCorrect +
     " | " + t("answered") + ": "
+      
